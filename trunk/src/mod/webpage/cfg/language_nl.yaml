@@ -1,0 +1,18 @@
+# labels
+title_menu: Titel in menu
+title_url: Url
+current_or_all_pages: Huidige / alle pagina`s
+module_title: Pagina eigenschappen
+module_description: Hier kunt u pagina eigenschappen bewerken, voor textuele aanpassingen klik het kadericoontje rechtsboven.
+
+# help descriptions
+help_title: De titel van uw pagina.<br>SEO TIP -> kort en bondig!
+help_path: Hiermee bepaalt u onder welke pagina deze pagina moet komen. <br>Dit kan dus ook invloed hebben op het menu.
+help_type: Wat voor type is deze pagina?
+help_visible: Wilt u deze pagina in het menu tonen? (opvragen via url werkt altijd)
+help_title_url: Hiermee kan uw pagina worden opgevraagd.<br>Als u hier `mijnpagina` invoert, kan de pagina worden opgevraagd via `http://www.uwsite.com/mijnpagina`
+help_title_menu: Hiermee wordt uw pagina in menu`s weergegeven.<br>SEO TIP -> kort en bondig!
+help_tpl: Hiermee kan u kiezen om uw pagina op een andere manier weer te geven
+help_meta_keywords: Dit zijn kernwoorden waarop u gevonden wilt worden door zoekmachines als Google.<br>SEO TIP -> zo weinig mogelijk!
+help_meta_description: Dit is een korte omschrijving voor zoekmachines als Google (+/- 3 regels).
+help_date: Hier kunt u de datum van deze pagina wijzigen.

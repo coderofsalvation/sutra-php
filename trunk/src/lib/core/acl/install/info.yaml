@@ -1,0 +1,13 @@
+version: 1.0
+note: |
+  ACL (Acces Control List) is basically a mechanism of limiting functionality per role/group.
+
+  For explanation how to use see /lib/core/acl/class.acl.php
+
+description: creates ajax tooltips from anchor tags
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0

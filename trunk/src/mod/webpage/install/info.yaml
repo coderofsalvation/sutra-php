@@ -1,0 +1,17 @@
+version: 1.0
+description: webpage module, for editing SQL pages and its properties
+note: |
+
+dependency:
+  mod:
+    - pagemanager:1.0
+  lib:
+    - language:1.0
+    - ajax:1.0
+    - mod:1.0
+    - url:1.0
+    - db:1.0
+    - yaml:1.0
+    - tpl:1.0
+    - treeManager:1.0
+    - event:1.0

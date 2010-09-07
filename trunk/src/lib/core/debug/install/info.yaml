@@ -1,0 +1,13 @@
+version: 1.0
+description: debug class which prints php server variables and can debug javascript live
+note: |
+  Be sure to put 'debug' in the 'autocreate' section in /data/cfg.yaml.php
+  After that you are ok, and and you can use _debug("some message or var") in your PHP
+  For more explanation how to use see /lib/core/db/class.dbManager.php
+
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0

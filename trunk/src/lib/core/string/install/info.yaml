@@ -1,0 +1,10 @@
+version: 1.0
+description: basic string utility functions to check email etc
+note: |
+
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0

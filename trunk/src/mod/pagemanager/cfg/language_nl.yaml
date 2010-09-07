@@ -1,0 +1,14 @@
+# labels
+module_title: Pagina manager
+module_description: Hier kunt u pagina`s toevoegen, verwijderen en sorteren
+title_menu: Titel in menu
+title_url: Url
+current_or_all_pages: Huidige / alle pagina`s
+reload_page_sure: Weet u zeker dat u deze pagina wilt openen?
+delete_page_sure: Weet u zeker dat u deze pagina wilt verwijderen?
+duplicate_page: Er bestaat al een pagina met deze naam
+
+# error/succes/warning messages
+error_sort: Uiterste positie bereikt
+error_delete: Pagina heeft nog onderliggende pagina`s
+error_locked: Pagina zit op slot

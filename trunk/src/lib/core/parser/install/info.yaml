@@ -1,0 +1,11 @@
+version: 1.0
+description: PHP/JAVASCRIPT Ajax class, Makes ajax request easy (client and browser side)
+description: text-command parser, can recognize text like '<do> <this> <int|str> <to> <that>'
+note: |
+  Usage:
+
+  For more examples see lib/core/class.parser.php
+
+dependency:
+  mod: 
+  lib:

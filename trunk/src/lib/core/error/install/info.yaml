@@ -1,0 +1,21 @@
+version: 1.0
+description: error class which handles errors/asserts/notices, has backtrace and email functionality
+note: |
+  Be sure to put 'error' in the 'autocreate' section in /data/cfg.yaml.php
+  After that you are ok, and can use in PHP:
+
+  _assert( false, "something went wrong!" ); // if configured, this will be emailed
+
+  in JAVASCRIPT:
+
+  print_r( document.location );
+  assert( is.Function( alert ), "this should not fail!" ); // if configures, this will be emailed
+  
+  For more explanation how to use see /lib/core/error/class.error.php
+
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0

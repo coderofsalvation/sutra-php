@@ -1,0 +1,19 @@
+version: 1.0
+description: xml reading/writing, and two conversion to arrays, in some ways cleaner then SimpleXML
+note: |
+  Usage:
+
+  [SMARTY]
+   {widget mod="mymodule" name="myWidget}
+   {widget file="/custom/widget/someWidget.php"}
+   {widget url="/news/item-1" [height,width,section,class]}
+   {widget url="http://www.google.com" [height,width,class]}
+
+  For explanation how to use see /lib/core/widget/class.widget.php
+
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0

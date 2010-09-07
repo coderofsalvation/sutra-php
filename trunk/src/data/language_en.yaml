@@ -1,0 +1,4 @@
+---
+message:
+  test: "I am english text defined in 'lang_en.yaml'"
+  edit: "Edit"

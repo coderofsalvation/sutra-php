@@ -1,0 +1,65 @@
+---
+global: 
+  author: Leon van Kammen
+  site_title: Sutra framework
+  short_domain: yourdomain.com
+  seo_keywords: your keywords here
+  seo_description: your description here
+  email: info@leon.vankammen.eu
+  session time: 20
+  rootdir: coding/projects/sutra/src
+  db_host: localhost
+  db_name: sutra_default
+  db_user: root
+  db_pass: s1nd3ll
+  cache: false
+url_override: 
+  foo/blah: mod/test/tpl/blah.tpl
+
+########################################################################################################################
+## GLOBAL ACL      -  (Acces Control list) permits user access to certain functionality
+##
+## if you want to limit functionality, add a keyword/eventname to a permissionlist and invoke
+## if( ! sutra::get()->acl->isAllowed( "someKeyword" ) ) die("not allowed!")
+##
+## NOTE #1: 'all' is a special keyword, its a shortcut for all acl permissions
+## NOTE #2: do not add keywords for modules here, but instead do in the mod's configfile
+#
+acl: 
+  groups: 
+    root: 
+      copy: all
+      permissions: 
+    admin: 
+      copy: root
+      permissions: -SUTRA_DEVELOPER,SUTRA_VIEW_PANEL,SUTRA_VIEW_WIDGET,SUTRA_MOD_PAGE_EDIT,SUTRA_MOD_WRITE
+    member: 
+      copy: 
+      permissions: 
+    user: 
+      copy: 
+      permissions: roleX
+
+#######################################################################################################################
+## LIBRARIES      - these classes in /lib are automatically created
+##
+## NOTE: the order of creation is very important so you must know what you are doing!
+##
+libs: 
+  libdirs: 
+    - lib/cms
+    - lib/app
+  autocreate: 
+    - debug
+    - login
+    - language
+    - event
+    - session
+    - db
+    - ajax
+    - widget
+    - mod
+    - admin
+    - popup
+    - tooltip
+    - datagrid

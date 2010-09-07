@@ -1,0 +1,13 @@
+---
+LABEL_ICON_EDIT: "Bewerken"
+LABEL_ICON_DEV: "Development mode"
+LABEL_ICON_LOGOUT: "Uitloggen"
+
+STATUS_EDIT: "Hiermee kunt u teksten live wijzigen"
+STATUS_DEV: "Development modus voor ontwikkelaars "
+STATUS_LOGOUT: "Hiermee logt u uit en verdwijnt dit panel"
+
+ALERT_DEV: "GREEN - caching/compression is disabled\n- RED   - caching/compresion is enabled\n\ncaching/compression involves: yaml, tpl, css & javascript files";
+
+STATUS_IS_LOADING: "word geladen"
+STATUS_WIDGET_IS_LOADING: "widget word geladen.."

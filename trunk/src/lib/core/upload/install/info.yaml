@@ -1,0 +1,11 @@
+version: 1.0
+description: simple upload handler (uploading/removing files)
+note: |
+  For explanation how to use see /lib/core/upload/class.upload.php
+
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0

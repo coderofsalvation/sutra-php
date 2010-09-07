@@ -1,0 +1,94 @@
+/* layout */
+div#panelStatus                     { border:1px solid #CCC; background-color:#EFEFEF; height:24px; text-indent:10px; color:#777}
+div#panelStatus, div#nicedit        { position:absolute; z-index:160; width:652px; margin-left:43px; margin-top:-1px; }
+table#panel                         { position:relative; z-index:160; top:20px; margin:auto 0; }
+table#popup                         { position:relative; z-index:160; top:40px; margin:auto 0; }
+div#popupPage                       { position:absolute; border:5px solid #CCC; border-top:5px solid #CCC; background-color:#FFF; margin:40px 43px 0px -322px; z-index:160; color:#000 }
+div#popupPage div#popupContent      { padding:20px; background-color:#FFF; height:256px; padding-bottom:40px}
+div#panelLeft                       { position:relative; float:left; height: 87px; background: url(../gfx/panel_left.gif) no-repeat; width:43px;  }
+div#panelMiddle                     { position:relative; float:left; height: 87px; background: url(../gfx/panel_back.gif) repeat-x; line-height:87px; color:#FFF; cursor:pointer; }
+div#panelRight                      { position:relative; float:left; height: 87px; background: url(../gfx/panel_right.gif) no-repeat; width:43px; }
+img.shadow                          { z-index: 100; margin-left:43px; padding: 5px 20px 0px 20px; width:600px; *display:none; position:absolute }
+
+/* dimensions */
+div#panelMiddle,
+div#popupPage                       { width:644px; }
+
+/* icons */
+div#panelMiddle img                 { margin: 20px 3px 0px 0px }
+div#panelLeft img#ajax              { position:absolute; top:44px; left:24px; }
+
+.opacity                            { opacity: .75; /* Standard: FF gt 1.5, Opera, Safari */
+                                      filter: alpha(opacity=75); /* IE lt 8 */
+                                      -ms-filter: "alpha(opacity=75)"; /* IE 8 */
+                                      -khtml-opacity: .75; /* Safari 1.x */
+                                      -moz-opacity: .75; /* FF lt 1.5, Netscape */
+                                    }
+
+/* deco shortcuts */
+.border-right                       { border-right: 1px dotted #888 }
+.border-left                        { border-left: 1px dotted #888 }
+.block                              { background-color:#F0F0F0;}
+div#popupContent .border            { border:3px solid #F0F0F0; background-color:#FFF }
+div#popupContent .fill              { background-color:#F0F0F0 }
+
+/* user interface presets */
+div#popupClose                      { width:18px; height:15px; cursor:pointer; border:1px solid #CCC; background: url(../gfx/icon.close.gif) no-repeat; position:absolute; left: 604px; top:20px; }
+div#popupClose:hover                { width:18px; height:15px; cursor:pointer; border:1px solid #999; }
+div#panelContainer div              { font-family: Tahoma, Verdana; font-size: 12px; line-height:19px; color:#444 }
+div.hr                              { border-bottom:1px dotted #888; clear:both; }
+a.button                            { border:1px solid #999; background-color:#FFF; color: #444; padding: 2px 10px 2px 10px; font-family: Verdana, Arial; font-weight:bold; font-size:11px; text-decoration:none; display:block; text-align:center; float:left; margin: 0px 10px 10px 0px; cursor:pointer}
+a.button:hover                      { background-color:#FFF; color:#444 }
+div#popupContent table td           { vertical-align: top; padding-bottom:10px; }
+div#popupContent h1,
+div#popupContent div.message,
+div#popupContent div.messageContent { display:inline; float:left; line-height: 30px }
+div#popupContent img.messageIcon    { margin:-2px 7px 0px 10px; float:left }
+div#popupContent div#popupInfo      { display:inline }
+div#popupContent div#helpInfo       { margin-top:2px; }
+div#popupContent img#fileLoading    { float:right; }
+.opacity-off                        { -moz-opacity:.00; filter:alpha(opacity=00); opacity:.00; }
+.hide                               { display:none }
+.absolute                           { position:absolute }
+
+/* tooltips */
+.toolTip,
+.toolTip tr,
+.toolTip td,
+.toolTip th,
+.toolTip table                      { margin:0; padding:0; background-color: #FFF; color: #555;  }
+.toolTip td                         { padding: 0.5em; font-family: sans-serif, Verdana, Arial; font-size: 11px }
+div#toolTip                         { border:3px solid #c0c0c0; background-color: #FFF; width:300px; z-index:999999; display:none }
+
+/* user interface text */
+div#popupContent *                  { font-size:14px; font-family:Arial; color:#000 }
+div#popupContent h1                 { font-size:24px; font-family:Verdana; color:#333}
+div#popupContent div#helpInfo *,
+div#popupContent input.action,
+div#popupContent button.action      { height: 50px; }
+div#popupContent input,
+div#popupContent select,
+div#popupContent option,
+div#popupContent textarea           { font-size:12px; font-family:Arial }
+div#popupContent div#overview *     { font-size:11px; }
+div.nicEdit-pane a:active,
+div.nicEdit-pane a:link,
+div.nicEdit-pane a:visited   { color:#444; text-decoration:none }
+div.nicEdit-pane a:hover     { color:#CCC; } 
+
+/* tree */
+div#popupContent table.tree td      { padding:0; margin:0 }, 
+
+div.nicEdit-pane table.tree a:active,
+div.nicEdit-pane table.tree a:link,
+div.nicEdit-pane table.tree a:visited
+div.nicEdit-pane table.tree a:hover, 
+div#popupContent table.tree a, 
+div#popupContent table.tree a:link, 
+div#popupContent table.tree a:visited, 
+div#popupContent table.tree a:active, 
+div#popupContent table.tree a:hover   { color:#444; font-size:11px }
+div#popupContent div.arrows           { left:310px; margin-top:4px;}
+div#popupContent table.tree           { width:310px; }
+div.arrows img                        { padding:4px 2px 2px 2px; border:1px solid #F0F0F0 }
+div.arrows img:hover                  { border:1px solid #AAA; background-color:#FFF }

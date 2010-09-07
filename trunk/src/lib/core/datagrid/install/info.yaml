@@ -1,0 +1,22 @@
+version: 1.0
+description: datagrid class (smarty/template_lite) functions
+note: |
+  Usage:
+
+	{column name="Author"   width=4 truncate="10" var="author"}
+  {column name="Email"    width=4 truncate="10" var="email"}
+  {column name="Website"  width=6 truncate="17" var="website"}
+  {column name="Date"     width=4 truncate="10" var="date"}
+  {column name="Page"     width=4 truncate="10" var="@page.title_menu"}
+  {column name="Options"  width=4 tpl="/mod/foomanager/tpl/datagrid.options.tpl" vars="id|email" align="center"}
+	{pagination itemsPerPage=10 currentPage=$_GET.page url="/foomanager/backend"}
+  {datagrid mod="foomanager" function="loadData" clickUrl="/foomanager/detail"}
+
+  see the 'commentmanager' module how to use it
+
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0

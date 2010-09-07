@@ -1,0 +1,20 @@
+version: 1.0
+description: basic eventhandler class for firing events amongst modules & libs
+note: |
+  Usage:
+
+  function test(){ print "test"; }
+  $sutra->event->addListener( "SOME_EVENT", $this, "test" );
+  $sutra->event->fire( "SOME_EVENT" );
+
+  of thru an url (be sure to use ACL!):
+
+  -> do request http://yoursite.com/?event=SOME_EVENT
+  function foo(){ if( sutra::get()->acl->isAllowed( "FOO" ) ) print "test"; }
+  $sutra->addListener( "SOME_EVENT", $this, "foo" )
+
+  For explanation how to use see /lib/core/event/class.event.php
+
+dependency:
+  mod: 
+  lib:

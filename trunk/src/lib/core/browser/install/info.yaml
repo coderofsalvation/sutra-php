@@ -1,0 +1,13 @@
+version: 1.0
+description: browser detection class
+note: |
+  Usage:
+  
+  $browsertype = $sutra->browser->get();
+
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0

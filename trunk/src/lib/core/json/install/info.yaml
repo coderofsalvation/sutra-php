@@ -1,0 +1,9 @@
+version: 1.0
+description: json encoding/decoding library (handy for communication javascript<->PHP<->flash)
+note:
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0

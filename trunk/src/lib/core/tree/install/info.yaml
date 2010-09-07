@@ -1,0 +1,14 @@
+version: 1.0
+description: creates windows/linux/mac style tree menus from JSON arrays
+note: |
+  See /lib/core/tree/class.tree.php on how to user
+
+  Also see module 'pagemanager' and 'filemanager' on how to use
+
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0
+    - json:1.0

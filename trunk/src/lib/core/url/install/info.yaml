@@ -1,0 +1,16 @@
+version: 1.0
+description: automatically splittify urls into params, handy for SEO friendly urls
+note: |
+  Usage:
+
+    $params = sutra::get()->url->get(); // get current url args as array
+    $params = sutra::get()->url->get("http://www.google.com/some/param/blah");
+
+  For explanation how to use see /lib/core/url/class.url.php
+
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0

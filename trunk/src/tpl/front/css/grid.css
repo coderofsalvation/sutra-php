@@ -1,0 +1,143 @@
+div.span-01, div.span-02, div.span-03, div.span-04, div.span-05, 
+div.span-06, div.span-07, div.span-08, div.span-09, div.span-10, 
+div.span-11, div.span-12, div.span-13, div.span-14, div.span-15, 
+div.span-16, div.span-17, div.span-18, div.span-19, div.span-20, 
+div.span-21, div.span-22, div.span-23, div.span-24 {
+	margin-right: 20px;
+}
+
+.last, div.last { margin-right: 0; }
+
+.span-01 { width: 20px; }
+.span-02 { width: 60px; }
+.span-03 { width: 100px; }
+.span-04 { width: 140px; }
+.span-05 { width: 180px; }
+.span-06 { width: 220px; }
+.span-07 { width: 260px; }
+.span-08 { width: 300px; }
+.span-09 { width: 340px; }
+.span-10 { width: 380px; }
+.span-11 { width: 420px; }
+.span-12 { width: 460px; }
+.span-13 { width: 500px; }
+.span-14 { width: 540px; }
+.span-15 { width: 580px; }
+.span-16 { width: 620px; }
+.span-17 { width: 660px; }
+.span-18 { width: 700px; }
+.span-19 { width: 740px; }
+.span-20 { width: 780px; }
+.span-21 { width: 820px; }
+.span-22 { width: 860px; }
+.span-23 { width: 900px; }
+.span-24 { width: 940px; margin: 0; }
+
+.append01 { padding-right: 40px; }
+.append02 { padding-right: 80px; }
+.append03 { padding-right: 120px; }
+.append04 { padding-right: 160px; }
+.append05 { padding-right: 200px; }
+.append06 { padding-right: 240px; }
+.append07 { padding-right: 280px; }
+.append08 { padding-right: 320px; }
+.append09 { padding-right: 360px; }
+.append10 { padding-right: 400px; }
+.append11 { padding-right: 440px; }
+.append12 { padding-right: 480px; }
+.append13 { padding-right: 520px; }
+.append14 { padding-right: 560px; }
+.append15 { padding-right: 600px; }
+.append16 { padding-right: 640px; }
+.append17 { padding-right: 680px; }
+.append18 { padding-right: 720px; }
+.append19 { padding-right: 760px; }
+.append20 { padding-right: 800px; }
+.append21 { padding-right: 840px; }
+.append22 { padding-right: 880px; }
+.append23 { padding-right: 920px; }
+
+.prepend01 { padding-left: 40px; }
+.prepend02 { padding-left: 80px; }
+.prepend03 { padding-left: 120px; }
+.prepend04 { padding-left: 160px; }
+.prepend05 { padding-left: 200px; }
+.prepend06 { padding-left: 240px; }
+.prepend07 { padding-left: 280px; }
+.prepend08 { padding-left: 320px; }
+.prepend09 { padding-left: 360px; }
+.prepend10 { padding-left: 400px; }
+.prepend11 { padding-left: 440px; }
+.prepend12 { padding-left: 480px; }
+.prepend13 { padding-left: 520px; }
+.prepend14 { padding-left: 560px; }
+.prepend15 { padding-left: 600px; }
+.prepend16 { padding-left: 640px; }
+.prepend17 { padding-left: 680px; }
+.prepend18 { padding-left: 720px; }
+.prepend19 { padding-left: 760px; }
+.prepend20 { padding-left: 800px; }
+.prepend21 { padding-left: 840px; }
+.prepend22 { padding-left: 880px; }
+.prepend23 { padding-left: 920px; }
+
+.pull01, .pull02, .pull03, .pull04, .pull05 {
+	float: left;
+	position: relative;
+}
+
+.push01 { margin: 0 -40px 1.5em 40px; }
+.push02 { margin: 0 -80px 1.5em 80px; }
+.push03 { margin: 0 -120px 1.5em 120px; }
+.push04 { margin: 0 -160px 1.5em 160px; }
+.push05 { margin: 0 -200px 1.5em 200px; }
+
+.push01, .push02, .push03, .push04, .push05 {
+	float: right;
+	position: relative;
+}
+
+.pull01 { margin-left: -40px; }
+.pull02 { margin-left: -80px; }
+.pull03 { margin-left: -120px; }
+.pull04 { margin-left: -160px; }
+.pull05 { margin-left: -200px; }
+
+input.span-01, textarea.span-01, select.span-01 { width: 20px!important; }
+input.span-02, textarea.span-02, select.span-02 { width: 60px!important; }
+input.span-03, textarea.span-03, select.span-03 { width: 100px!important; }
+input.span-04, textarea.span-04, select.span-04 { width: 140px!important; }
+input.span-05, textarea.span-05, select.span-05 { width: 180px!important; }
+input.span-06, textarea.span-06, select.span-06 { width: 220px!important; }
+input.span-07, textarea.span-07, select.span-07 { width: 260px!important; }
+input.span-08, textarea.span-08, select.span-08 { width: 300px!important; }
+input.span-09, textarea.span-09, select.span-09 { width: 340px!important; }
+input.span-10, textarea.span-10, select.span-10 { width: 380px!important; }
+input.span-11, textarea.span-11, select.span-11 { width: 420px!important; }
+input.span-12, textarea.span-12, select.span-12 { width: 460px!important; }
+input.span-13, textarea.span-13, select.span-13 { width: 500px!important; }
+input.span-14, textarea.span-14, select.span-14 { width: 540px!important; }
+input.span-15, textarea.span-15, select.span-15 { width: 580px!important; }
+input.span-16, textarea.span-16, select.span-16 { width: 620px!important; }
+input.span-17, textarea.span-17, select.span-17 { width: 660px!important; }
+input.span-18, textarea.span-18, select.span-18 { width: 700px!important; }
+input.span-19, textarea.span-19, select.span-19 { width: 740px!important; }
+input.span-20, textarea.span-20, select.span-20 { width: 780px!important; }
+input.span-21, textarea.span-21, select.span-21 { width: 820px!important; }
+input.span-22, textarea.span-22, select.span-22 { width: 860px!important; }
+input.span-23, textarea.span-23, select.span-23 { width: 900px!important; }
+input.span-24, textarea.span-24, select.span-24 { width: 940px!important; }
+
+.padding-left    { padding-left: 20px }
+.padding-right   { padding-right: 20px }
+.padding-bottom  { padding-bottom: 20px }
+.padding-top     { padding-top: 20px }
+.margin-left     { margin-left: 20px }
+.margin-right    { margin-right: 20px }
+.margin-bottom   { margin-bottom: 20px }
+.margin-top      { margin-top: 20px }
+.margin          { margin: 20px}
+.padding         { padding: 19px}
+.left            { float: left; *margin-left:7px }
+.right           { float: right }
+.clear          { clear: both }

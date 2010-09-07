@@ -1,0 +1,9 @@
+version: 1.0
+description: [CORE] page class, serves as container of content, title, keywords,  mastertemplate etc.
+note:
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0

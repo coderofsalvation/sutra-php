@@ -1,0 +1,9 @@
+version: 1.0
+description: multi language support thru sessionvariable
+note:
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0

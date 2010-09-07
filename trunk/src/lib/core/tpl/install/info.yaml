@@ -1,0 +1,9 @@
+version: 1.01
+description: [CORE] smarty template engine (template_lite), optimized sutra version
+note: |
+  For explanation how to use see http://templatelite.sourceforge.net/
+
+dependency:
+  mod: 
+  lib:
+    - yaml:1.0

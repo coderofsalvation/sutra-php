@@ -1,0 +1,11 @@
+# labels
+module_title: Bestandsbeheer
+module_description: Hier kunt u bestanden uploaden & verwijderen
+reload_page_sure: Weet u zeker dat u deze bestand wilt openen?
+delete_page_sure: Weet u zeker dat u deze bestand wilt verwijderen?
+duplicate_page: Er bestaat al een bestand met deze naam
+
+# error/succes/warning messages
+error_delete: Bestand zit op slot
+error_add: Deze directory zit op slot
+error_noroot: Upload naar een directory a.u.b.

@@ -1,0 +1,11 @@
+div.arrows                      { position:absolute; left:188px; margin-top:4px;display:none}
+div.arrows img                  { margin-left:5px; cursor:pointer; }
+/*table.tree tr td img            { margin-top:2px }*/
+div#popupContent table.tree a, 
+div#popupContent table.tree a:link, 
+div#popupContent table.tree a:visited, 
+div#popupContent table.tree a:active, 
+div#popupContent table.tree a:hover              { color: #000000; text-decoration: none; font-family: Tahoma, Verdana; font-size: 11px; line-height:11px}
+table.tree tr.over  div.arrows  { display:inline}
+table.tree                      { width:209px; }
+div.treeRuler                   { height:10px; border-bottom: 1px dotted #555; margin-bottom:10px; }

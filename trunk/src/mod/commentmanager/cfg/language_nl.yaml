@@ -1,0 +1,10 @@
+# labels
+module_title: Commentmanager
+module_description: hier kun je comments beheren
+detail_description: dit is een uitgebreide view van een comment
+
+# notifies
+error_delete: item kon niet verwijderd worden
+
+# help
+help_test: (stel mij in @ commentmanager/cfg/language_nl.yaml)

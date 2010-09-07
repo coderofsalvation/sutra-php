@@ -1,0 +1,3 @@
+--- here you can put mysql code which is automatically executed upon installation
+---
+--- CREATE TABLE and so on

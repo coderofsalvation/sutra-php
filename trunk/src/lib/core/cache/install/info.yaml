@@ -1,0 +1,20 @@
+version: 1.0
+description: class which gets/sets variables from/into cachefile
+note: |
+  Usage:
+
+  // use default cachefile /data/cache/sutra.cache
+  $sutra->cache->set( "yourvariable", 123 );
+  $result = $sutra->cache->get( "yourvariable" );
+
+  // use cachefile /data/cache/mycachefile.cache
+  $cachefile = "/data/cache/mycachefile.cache";
+  $sutra->cache->set( "yourvariable", 123, $cachefile );
+  $result = $sutra->cache->get( "yourvariable", $cachefile );
+
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0
