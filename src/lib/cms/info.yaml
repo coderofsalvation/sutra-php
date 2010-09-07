@@ -1,0 +1,35 @@
+version: 0.9 
+note: |
+
+description: CMS functionality (modules/widgets/backend/users/permissions/live page editing/datagrid/etc)
+dependency:
+  mod: 
+    - webpage:1.0
+    - pagemanager:1.0
+    - filemanager:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0
+    - ajax:1.0
+    - cache:1.0
+    - compressor:1.0
+    - db:1.0
+    - debug:1.0
+    - error:1.0
+    - event:1.0
+    - files:1.0
+    - JSMin:1.0
+    - language:1.0
+    - nicedit:1.0
+    - page:1.0
+    - pagination:1.0
+    - session:1.0
+    - tooltip:1.0
+    - string:1.0
+    - tpl:1.0
+    - tree:1.0
+    - treeManager:1.0
+    - upload:1.0
+    - url:1.0
+    - widget:1.0
+    - yaml:1.0

@@ -1,0 +1,12 @@
+version: 1.0
+note: |
+  Tooltip-lib creates (ajax/static) tooltips from anchor tags
+
+  For explanation how to use see /lib/core/tooltip/js/tooltip.js
+
+
+description: creates ajax tooltips from anchor tags
+dependency:
+  mod: 
+  lib:
+    - ajax:1.0

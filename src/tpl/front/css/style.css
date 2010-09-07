@@ -1,0 +1,35 @@
+.border             { border:1px solid #CCC; background-color:#F7F7F7 }
+.clear              { clear: both }
+div#header          { height:220px; margin-top:40px; background: url(../gfx/header.background.gif) no-repeat 273px 15px; }
+div#content         { min-height:300px; }
+div#footer          { }
+div#breadcrumb      { text-align:left; font-size:11px; margin: 5px 0px 5px 0px; }
+div#wallpaper       { height:100%; width:100%; overflow:hidden; position:fixed; top:0px; z-index:-9999 }
+div#wallpaper div   { height:200%; width:200%; left:-50%; top:-50%;}
+div#wallpaper img   { margin:0 auto; min-height:50%; min-width:50%; z-index:-9999; width: 100%; position:absolute }
+
+/*****************************************************************************
+ * borders 
+ */
+div#header,
+div#content         { border:5px solid #CCC; text-align:left; background-color:#FFF; }
+
+/*****************************************************************************
+ * text 
+ */
+a:active,
+a:link,
+a:visited           { color:#666; text-decoration:none }
+a:hover             { color:#999; } 
+body                { font-family: "Trebuchet MS", Tahoma, Arial; font-size:13px; }
+h1,h2,h3,h4,h5      { font-family: myriad, Times, Verdana; font-weight:bold }
+h1                  { font-size:26px; }
+
+.opacity-off        { -moz-opacity:.01; filter:alpha(opacity=01); opacity:.01; }
+.curved             { border-radius: 8px; /* CSS3 compliant browsers */
+                    -moz-border-radius: 8px; /* firefox */ 
+                    -webkit-border-radius: 8px; /* Google Chrome, Safari  */ 
+                    -khtml-border-radius: 8px; /* Linux Browsers */ 
+                    *behavior: url("curved.htc"); /* IE Browsers */ 
+                    background-image: url("curved.svg");  /* Opera 9.5+ */ 
+                    }

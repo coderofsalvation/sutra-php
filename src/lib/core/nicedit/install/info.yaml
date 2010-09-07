@@ -1,0 +1,16 @@
+version: 1.0
+description: rich texteditor for javascript
+note: 
+  Usage:
+
+  just be sure to call sutra::get()->nicedit to include the javascripts.
+  After that you can call the nicedit functions in js 
+  
+  For more information visit http://nicedit.com/
+
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0

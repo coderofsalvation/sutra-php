@@ -1,0 +1,38 @@
+version: 1.0
+description: database class & manager for performin SQL queries
+note: |
+  Simple Database Usage:
+
+  // get array of objects (pass 'false' for arrays of arrays)
+  $arr = $sutra->db->getArray( "SELECT * FROM `sutra_page`" );
+  // insert new db record
+  $sutra->db->insertArray( "sutra_page", array('name'=>'foo','author'=>'fred') );
+  // update array with id 12
+  $sutra->db->updateArray( "sutra_page", array('name'=>'foo','author'=>'fred'), 12 );
+
+  DataManager Usage:
+
+  // retrieve single object
+  $obj = new dbObject("sutra_page");
+  $obj->load( "id", 12 );
+  $obj->author = "newauthor";
+  $obj->save();
+
+  // combined objects
+  $obj  = new dbObject("sutra_page");
+  // load all pages
+  $all  = $obj->loadAll();
+  // load all pages with category_id 12, sort by title ascending, 
+  // maximum 12 pages (more opt. args possible)
+  $objs = $obj->loadByProperty( "category_id", 12, 'title', "ASC", 12 );
+
+  NOTE: Please make sure you edit the database config vars in /data/cfg.yaml.php!!
+
+  For more explanation how to use see /lib/core/db/class.dbManager.php
+
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0

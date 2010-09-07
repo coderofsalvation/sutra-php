@@ -1,0 +1,21 @@
+version: 1.0
+description: many2many conversion of SQL <-> PHP (associative) arrays and tree's
+note: |
+  class which makes life easier when it comes to storing/retrieving hierarchical 
+  arrays (trees) from the database. When you use this, you will be saved from 
+  lots of recursive mayhem ;]
+  
+  the idea is to do two-way conversion of trees and indented lists easily.
+  Why? So you can easily store the structure in the database, and easily render
+  this structure into a html selectionbox/menus etc. Think of it as some kind of 
+  'serialize/unserialize' function, but with having the search-benefits of SQL.
+  I hope you have fun slappin those trees :]
+
+  For explanation how to use see /lib/core/treeManager/class.treeManager.php
+
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0

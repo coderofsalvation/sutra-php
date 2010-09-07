@@ -1,0 +1,15 @@
+version: 1.0
+description: [CORE] yaml file parser, create language/config files in no time
+note: |
+  Usage:
+    
+    [YAML FILE /data/cfg.yaml.php]
+    foo: blahblah
+
+    [PHP]
+    $foo = $sutra->yaml->cfg['foo'];
+    print $foo; // prints 'blahblah'
+
+dependency:
+  mod: 
+  lib:

@@ -1,0 +1,15 @@
+<dbgen>
+  <table name='sutra_page_comment'>
+    <id                type='int'></id>
+    <author            type='varchar'></author>
+    <date              type='date'></date>
+    <email             type='varchar'></email>
+    <website           type='varchar'></website>
+    <html              type='html'></html>
+    <page_id           type='int'></page_id>
+    <relations>
+      <relation var='page' from='sutra_page_comment.page_id' to='sutra_page.id'></relation>
+    </relations>
+  </table>
+</dbgen>
+

@@ -1,0 +1,22 @@
+version: 1.0
+description: timestamp calculation class, very handy when working with dates
+note: |
+  Usage example: 
+
+     $time = new time();
+     $now  = time();
+     $time->time->set( $now );
+     $then = $time->time->addYear( 20 );
+     echo date(DATE_ATOM, $then);
+     $diff = $time->time->diff( $then );
+     echo "<br>";
+     echo date(DATE_ATOM, $diff );
+
+  For explanation how to use see /lib/core/time/class.time.php
+
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0

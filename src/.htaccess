@@ -1,0 +1,17 @@
+Header unset ETag
+FileETag None
+
+<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$">
+Header set Cache-Control "max-age=2600000, public"
+</FilesMatch>
+
+<FilesMatch "\\.(js|css|html|htm|php|xml)$">
+SetOutputFilter DEFLATE
+</FilesMatch>
+
+RewriteEngine on
+RewriteBase /coding/projects/sutra/src/
+RewriteRule ^data/upload(.*) - [L]
+RewriteRule ^lib(.*) - [L]
+RewriteRule ^admin?$ index.php?admin=1 [L]
+RewriteRule !\.(js|svg|ico|psd|doc|pdf|gif|jpg|jpeg|png|css|swf|zip|ai|eps|rar|sit|hqx|txt|tpl|xml|html|htm|exe|doc|docx|xlsx|xls|rtf|mp3|wav|iff|ogg|htc)$ index.php [NC]

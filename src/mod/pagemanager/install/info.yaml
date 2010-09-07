@@ -1,0 +1,18 @@
+version: 1.0
+description: pagemanager module, for adding/removing SQL pages
+note: |
+
+dependency:
+  mod:
+  lib:
+    - tree:1.0
+    - string:1.0
+    - language:1.0
+    - ajax:1.0
+    - mod:1.0
+    - url:1.0
+    - db:1.0
+    - yaml:1.0
+    - tpl:1.0
+    - treeManager:1.0
+    - event:1.0

@@ -1,0 +1,16 @@
+version: 1.0
+description: css parsing/writing class, (handy if you want to share colors across CSS/PHP/Smarty/etc)
+note: |
+  Usage:
+
+  $css  = $utra->css;
+  $css->ParseStr("b {font-weight: bold; color: #777777;} b.test{text-decoration: underline;}");
+  echo $css->get("b","color");     // returns #777777
+  echo $css->Get("b.test","color");// returns #777777
+
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0

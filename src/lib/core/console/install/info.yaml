@@ -1,0 +1,19 @@
+version: 1.0
+description: PHP/JAVASCRIPT Ajax class, Makes ajax request easy (client and browser side)
+note: |
+  Usage:
+
+  example1: client side
+  ----------------------
+  [HTML]
+  <div id="main"></div>
+  <li><a href="pagex" class="ajax" rel="main">item x</a></li>
+
+  For more examples see /lib/core/ajax/class.ajax.php
+
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0

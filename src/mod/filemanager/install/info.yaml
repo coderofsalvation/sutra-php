@@ -1,0 +1,19 @@
+version: 1.0
+description: filemanager module, for uploading/deleting files
+note: |
+
+dependency:
+  mod:
+    - pagemanager:1.0
+  lib:
+    - acl:1.0
+    - tree:1.0
+    - language:1.0
+    - ajax:1.0
+    - mod:1.0
+    - url:1.0
+    - db:1.0
+    - yaml:1.0
+    - tpl:1.0
+    - treeManager:1.0
+    - event:1.0

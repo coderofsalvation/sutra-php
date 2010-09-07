@@ -1,0 +1,74 @@
+---
+add:                Toevoegen
+name:               Naam
+yep:                Ja
+nope:               Nee
+save:               Opslaan
+delete:             Verwijderen
+edit:               Bewerken
+back:               Terug
+send:               Verstuur
+login:              Inloggen
+logout:             Uitloggen
+remember_me:        Onthoudmij
+username:           Gebruikersnaam
+password:           Wachtwoord
+change_password:    Wachtwoordaanpassen
+password_validation:Wachtwoordcontrole
+forgot_password:    Wachtwoordvergeten
+email:              E-mailadres
+users:              Gebruikers
+group:              Groep
+groups:             Groepen
+permissions:        Rechten
+settings:           Instellingen
+modules:            Modules
+version:            Versie
+welcome:            Welkom
+menu:               Menu
+options:            Opties
+date:               Datum
+time:               Tijd
+title:              Titel
+module:             Module
+description:        Omschrijving
+overview:           Overzicht
+add:                Toevoegen
+sort:               Sorteren
+preview:            Voorbeeldbekijken
+undo:               Ongedaanmaken
+cancel:             Annuleren
+type:               Type
+dimension:          Afmeting
+dimensions:         Afmetingen
+caption:            Opschrift
+href:               Hyperlink
+width:              Breedte
+height:             Hoogte
+ip:                 Ipadres
+pixel:              Pixel
+pixels:             Pixels
+image:              Afbeelding
+images:             Afbeeldingen
+property:           Eigenschap
+properties:         Eigenschappen
+text:               Tekst
+color:              Kleur
+next:               Volgende
+previous:           Vorige
+apply:              Toepassen
+show:               Toon
+per_page:           Perpagina
+page:               Pagina
+records_found:      Gevondenitems
+path:               Pad
+advanced:           Uitgebreid
+help:               Help
+simple:             Simpel
+meta_description:   Meta omschrijving
+meta_keywords:      Meta kernwoorden
+make_a_choice:      Maak een keuze
+saved_succesfull:   opgeslagen
+not_found:          niet gevonden
+user_logged_in:     U bent succesvol ingelogd
+visible: Zichtbaar

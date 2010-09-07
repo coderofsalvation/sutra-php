@@ -1,0 +1,19 @@
+version: 1.0
+description: compresses javascript and css
+note: |
+  Usage:
+  
+  print $sutra->compressor->process( array("/some/path/bla.js",  "/other/path/foo.js",  "js" );
+  print $sutra->compressor->process( array("/some/path/bla.css", "/other/path/foo.css", "css" );
+  
+  will output:
+  
+  <script type="javascript" src="3453lkj3453lkj345.js"></script>
+  <link rel="stylesheet" href="3453lkj3453lkj345.css" />
+
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0

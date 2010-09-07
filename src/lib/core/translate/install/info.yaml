@@ -1,0 +1,12 @@
+version: 1.0
+description: quickly translate texts to any language using Google translate
+note: |
+  Usage:
+    
+    print sutra::get()->translate->process("Hello world!", "en", "nl" );
+    // outputs "Hallo wereld!"
+
+dependency:
+  mod: 
+  lib:
+    - json

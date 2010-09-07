@@ -1,0 +1,15 @@
+# labels
+module_title: Categorie manager
+module_description: Hier kunt u categorieen toevoegen, verwijderen en sorteren
+duplicate_category: Er bestaat al een categorie met deze naam
+category: Categorie
+posted_in_deleted_category: Gepost in verwijderde categorie
+posted_in: Gepost in
+category_no_content: Deze categorie heeft nog geen artikelen onder zich.
+article_no_content: Dit artikel heeft nog geen content
+
+
+# error/succes/warning messages
+error_sort: Uiterste positie bereikt
+error_delete: Categorie heeft nog onderliggende categorieen
+delete_category_sure: Weet u zeker dat u deze categorie wilt verwijderen?

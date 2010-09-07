@@ -1,0 +1,16 @@
+version: 1.0
+description: session class which manages/creates (ajax)  sessions or timeouts
+note: |
+  Usage:
+  
+  please put a variable 'var SESSION_ID = <? echo session_id(); ?>' in javascript,
+  and pass it with every ajax-request.
+  Then this php class will restore the session, and you will not have to deal with
+  mysterious empty $_SESSION arrays during ajaxcalls.
+
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0

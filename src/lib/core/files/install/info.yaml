@@ -1,0 +1,11 @@
+version: 1.0
+description: filemanager class for reading directories as array or tree (recursively)
+note: |
+  For explanation how to use see /lib/core/files/class.files.php
+
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.0
