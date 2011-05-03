@@ -51,6 +51,7 @@ class dbManager{
       if( $stripPrefix != "" )
         $key = str_replace( $stripPrefix, "", $key );
       dbObject::$_target->$key = $item;
+      $this->$key = $item; // enable decorators __set() function to respond
     }
     return dbObject::$_target;
   }
@@ -75,7 +76,7 @@ class dbManager{
    * @return void
    */
   public function save( $tablename = false ){
-    $this->_tablename = $tablename ? $tablename : $this->_tablename;
+    dbObject::$_target->_tablename = $tablename ? $tablename : dbObject::$_target->_tablename;
     return sutra::get()->db->saveObject( dbObject::$_target->_tablename, dbObject::$_target, true );
   }
 
@@ -229,5 +230,17 @@ class dbManager{
     return sutra::get()->db->getArray( "SELECT * FROM `{$target->_tablename}` {$where} {$order} {$limit}", $returnObjs, $parseYaml );
   }
 
+  /**
+   * getLastId 
+   * get last id from the current database table
+   * @access public
+   * @return void
+   */
+  public function getLastId(){
+    $target     = dbObject::$_target;
+		$sql = "SELECT MAX(ID) AS LastID FROM `{$target->_tablename}`";
+		$result = sutra::get()->db->getArray( $sql, false );
+		return is_array($result) && count($result) ? $result[0]['LastID'] : -1;
+  }
 }
 ?>

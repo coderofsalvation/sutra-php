@@ -1,4 +1,4 @@
-version: 1.0
+version: 1.08
 description: database class & manager for performin SQL queries
 note: |
   Simple Database Usage:
