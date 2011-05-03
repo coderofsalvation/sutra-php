@@ -41,8 +41,10 @@ class db{
   }
 
   private function __construct( $host = false, $user = false, $password = false, $dbname = false ){
-    _assert( ($this->id = mysql_connect( $host, $user, $password )), "can't connect to db, check config");
-    _assert( mysql_select_db( $dbname ), "connected to db but dbname not correct, check config");
+    if( !_assert( ($this->id = mysql_connect( $host, $user, $password )), "can't connect to db, check config") )
+      sutra::get()->event->fire( "DB_CONNECT_ERROR" );
+    if( !_assert( mysql_select_db( $dbname ), "connected to db but dbname not correct, check config") )
+      sutra::get()->event->fire( "DB_SELECT_ERROR" );
     $this->queries = array();
   }
 
@@ -62,16 +64,15 @@ class db{
     $this->checkErr();
     $this->queries[] = $sql;
     if( $returnDbObjects ){
-      preg_match_all('/(FROM|from) [`](\w+)[`]/', $sql, $tables);
+      preg_match_all('/(FROM|from) [`](\w+)[`]/i', $sql, $tables);
       _assert( count( $tables ) == 3, "getArray() returnDbObjects only work with simple queries! for advanced queries dbObjects become slow!" );
     }
-    if (mysql_num_rows($rs) != 0){
+    if ( _assert( is_resource($rs), "'{$sql}' failed..does table exist?") && mysql_num_rows($rs) != 0){
       while ($row = $this->strip(mysql_fetch_assoc($rs))){
         if( $parseYaml && isset( $row['yaml'] ) )
             $row['yaml'] = sutra::get()->yaml->loadString( $row['yaml'] );
         if( $returnDbObjects ){
-          $sqlObj             = new dbObject();
-          $sqlObj->_tablename = ( count($tables) == 3 ) ? $tables[2][0] : false;
+          $sqlObj             = new dbObject( count($tables) == 3 ? $tables[2][0] : false );
           $sqlObj->populate( $row );
           $result[]           = $sqlObj;
         }else $result[] = $row;
@@ -101,12 +102,14 @@ class db{
   function saveObject ( $tableName, $obj, $parseYaml = true ) 
   {
     _assert( strlen($tableName), "please specify a tablename in save() or saveObject()" );
+    $arr = array();
     foreach( $obj as $variable => $value )
-      if( $variable[0] == "_" )
-        unset( $obj->$variable );
-    if( $parseYaml && isset( $obj->yaml ) && is_array( $obj->yaml ) )
-        $obj->yaml = utf8_encode( sutra::get()->yaml->dump( $obj->yaml ) );
-    return $this->updateArray( $tableName, (array)$obj, $obj->id );
+      if( $variable[0] != "_" ) $arr[ $variable ] = $value;
+    if( $parseYaml && isset( $arr['yaml'] ) && is_array( $arr['yaml'] ) )
+        $obj->yaml = utf8_encode( sutra::get()->yaml->dump( $arr['yaml'] ) );
+    return  ( isset($arr['id'] ) && !empty( $arr['id'] ) && $arr['id'] ) ? 
+            $this->updateArray( $tableName, $arr, $arr['id'] ) :
+            $this->insertArray( $tableName, $arr );
   }
 
   /* 
@@ -121,7 +124,7 @@ class db{
       return $arr;
     $newArr = array();
     foreach( $arr as $k => $v ){
-      $kparts = split( "_", $k );
+      $kparts = explode( "_", $k );
       $newArr[ $kparts[ count($kparts)-1 ] ] = $this->stripUnderScores( $v );
     }
     return $newArr;
@@ -132,6 +135,8 @@ class db{
    */ 
   function insertArray($table_name, $array) 
   {
+    $checked_query_fields = array();
+    $checked_query_values = array();
     foreach($array as $field_name => $field_value) {
       if( strtoupper($field_value) == "TRUE" || strtoupper($field_value) == "FALSE" )
         $checked_query_values[] = $this->escapeString($field_value);
@@ -139,10 +144,12 @@ class db{
         $checked_query_values[] = "'" . $this->escapeString($field_value) . "'";
       $checked_query_fields[] = "`" . $this->escapeString($field_name) . "`";
     }
-    $query_fields = implode(",", $checked_query_fields);
-    $query_values = implode(",", $checked_query_values); 
-    $insert_query = "INSERT INTO `{$table_name}` ({$query_fields}) VALUES($query_values)";
-    $this->query($insert_query);
+    if( _assert( count($checked_query_values) && count($checked_query_fields), "insertArray sql generation failed because of empty/nonmatching field/values" ) ){
+      $query_fields = implode(",", $checked_query_fields);
+      $query_values = implode(",", $checked_query_values); 
+      $insert_query = "INSERT INTO `{$table_name}` ({$query_fields}) VALUES($query_values)";
+      $this->query($insert_query);
+    }
     return true;
   }
   /* 
