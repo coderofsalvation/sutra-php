@@ -72,6 +72,13 @@
 class treeManager{
 
   /**
+   * indicator for corrupt tree's/input 
+   *
+   * @var boolean
+   */
+  private $error = false;
+
+  /**
    * Singleton      - get instance by calling treeManager::get()
    */
   private static $instance;
@@ -90,10 +97,11 @@ class treeManager{
    * @return void
    */
   function getTree( $array, $id_key = 'id', $parent_id_key = 'parent_id', $weight_key = 'weight' ){
-    assert( is_array( $array ) );
+    _assert( is_array( $array ), "need array!" );
     // assign children to every element
     foreach( $array as $index => $element )
-      $array[ $index ]['children'] = $this->getChildren( $element[ $id_key ], $parent_id_key, $id_key, $weight_key, $array );
+      if( !$this->error )
+        $array[ $index ]['children'] = $this->getChildren( $element[ $id_key ], $parent_id_key, $id_key, $weight_key, $array );
     // now remove non-parent nodes from root
     foreach( $array as $index => $element )
       if( $element[ $parent_id_key ] > 0 )
@@ -110,15 +118,20 @@ class treeManager{
    * @param mixed $id_key             this is the id key of each element
    * @param mixed $weight_key         this is the 'weight' key of the array
    * @param mixed $array              this is the array which will be used as input
+   * @param mixed $recursive          ** INTERNAL USAGE ** DO NOT USE **
    * @access public
    * @return array                    the children of this parent id
    */
-  function getChildren( $parent_id_value, $parent_id_key, $id_key, $weight_key, $array ){
+  function getChildren( $parent_id_value, $parent_id_key, $id_key, $weight_key, $array, $recursive = -1){
     if( !is_array( $array ) ) return false;
     $children = array();
     // check if children look for their parent
     foreach( $array as $key => $item ){
-      _assert( isset( $item[ $parent_id_key ] ), "parent_id key '{$parent_id_key}' not set in each array element...cannot build tree");
+      if( !_assert( $item[ $parent_id_key ] != $recursive, "cyclic crossreference detected for parent_id '{$parent_id_key}'" ) ){
+        $this->error = true; 
+        return $children;
+      }
+      if( !_assert( isset( $item[ $parent_id_key ] ), "parent_id key '{$parent_id_key}' not set in each array element...cannot build tree") ) return $children;
       if( $item[ $parent_id_key ] == $parent_id_value ){
         $weight     = $item[ $weight_key ];
         while( isset( $children[ $weight ] ) )
@@ -128,7 +141,8 @@ class treeManager{
     }
     // check if children have children
     foreach( $children as $key => $child ){
-      $children[ $key ]['children'] = $this->getChildren( $child[ $id_key ], $parent_id_key, $id_key, $weight_key, $array );
+      if( $this->error ) break;
+      $children[ $key ]['children'] = $this->getChildren( $child[ $id_key ], $parent_id_key, $id_key, $weight_key, $array, $parent_id_value );
     }
     ksort( $children );
     return $children;
@@ -161,10 +175,10 @@ class treeManager{
    * @access public
    * @return void
    */
-  function slapTree( $array, $indentSize = 3, $indentKey = "title_menu", $glue = "/", $spacer = " ",$child_key = "children" )
+  function slapTree( $array, $indentSize = 3, $indentKey = "title_menu", $glue = "/", $spacer = " ",$child_key = "children", $firsttime = true )
   {
     global $slappedArray;
-    if( !is_array($slappedArray) ){
+    if( !is_array($slappedArray) || $firsttime ){
       $slappedArray = array();
       $array = $this->addIndents( $array, $child_key, $indentSize, $indentKey, $glue, $spacer );
     }
@@ -175,7 +189,7 @@ class treeManager{
         unset( $element[ $child_key ] );
         $slappedArray[] = $element;
         if( is_array( $children ) )
-          $this->slapTree( $children, $indentSize, $indentKey, $glue, $spacer, $child_key );
+          $this->slapTree( $children, $indentSize, $indentKey, $glue, $spacer, $child_key, false );
       }
     }
     return $slappedArray;
@@ -200,21 +214,27 @@ class treeManager{
    * @return void
    */
   function addIndents( $array, $child_key, $indentSize, $indentKey, $glue,  $spacer, $_level = 1 ){
+    global $path;
     if( !is_array( $array ) ) return false;
     foreach( $array as $key => $element ){
       if( isset( $element['indent'] ) ) return;
       if( $_level == 1 ){
         $array[ $key ]['indent'] = 0;
-        $array[ $key ][ "{$indentKey}_indent" ] = $glue . $array[ $key ][ $indentKey ];
+        $array[ $key ][ "{$indentKey}_indent" ]   = $glue . $element[ $indentKey ];
+        $array[ $key ][ "{$indentKey}_path" ]     = $glue . $element[ $indentKey ];
       }
       if( is_array( $element[ $child_key ] ) ){
+        $path_bak  = $path;
+        $path     .= $glue . $element[ $indentKey ];
         $array[ $key ][ $child_key ] = $this->addIndents( $array[ $key ][$child_key ], $child_key, $indentSize, $indentKey, $glue, $spacer, $_level + 1 );
         foreach( $element[ $child_key ] as $k => $child ){
-          $array[ $key ][ $child_key ][$k]['indent'] = $indent = $_level * $indentSize;
-          $array[ $key ][ $child_key ][$k]["{$indentKey}_indent"] = "{$glue} {$child[ $indentKey ]}";
+          $array[ $key ][ $child_key ][$k]["indent"]                = $indent = $_level * $indentSize;
+          $array[ $key ][ $child_key ][$k]["{$indentKey}_path"]     = $path . $glue . $child[ $indentKey ];
+          $array[ $key ][ $child_key ][$k]["{$indentKey}_indent"]   = "{$glue} {$child[ $indentKey ]}";
           for( $i = 0; $i < (int)$indent; $i++ )
             $array[ $key ][ $child_key ][$k]["{$indentKey}_indent"] = $spacer . $array[ $key ][ $child_key ][$k]["{$indentKey}_indent"];
         }
+        $path = $path_bak;
       }
     }
     return $array;

@@ -72,6 +72,13 @@
 class treeManager{
 
   /**
+   * indicator for corrupt tree's/input 
+   *
+   * @var boolean
+   */
+  private $error = false;
+
+  /**
    * Singleton      - get instance by calling treeManager::get()
    */
   private static $instance;
@@ -93,7 +100,8 @@ class treeManager{
     _assert( is_array( $array ), "need array!" );
     // assign children to every element
     foreach( $array as $index => $element )
-      $array[ $index ]['children'] = $this->getChildren( $element[ $id_key ], $parent_id_key, $id_key, $weight_key, $array );
+      if( !$this->error )
+        $array[ $index ]['children'] = $this->getChildren( $element[ $id_key ], $parent_id_key, $id_key, $weight_key, $array );
     // now remove non-parent nodes from root
     foreach( $array as $index => $element )
       if( $element[ $parent_id_key ] > 0 )
@@ -110,15 +118,20 @@ class treeManager{
    * @param mixed $id_key             this is the id key of each element
    * @param mixed $weight_key         this is the 'weight' key of the array
    * @param mixed $array              this is the array which will be used as input
+   * @param mixed $recursive          ** INTERNAL USAGE ** DO NOT USE **
    * @access public
    * @return array                    the children of this parent id
    */
-  function getChildren( $parent_id_value, $parent_id_key, $id_key, $weight_key, $array ){
+  function getChildren( $parent_id_value, $parent_id_key, $id_key, $weight_key, $array, $recursive = -1){
     if( !is_array( $array ) ) return false;
     $children = array();
     // check if children look for their parent
     foreach( $array as $key => $item ){
-      _assert( isset( $item[ $parent_id_key ] ), "parent_id key '{$parent_id_key}' not set in each array element...cannot build tree");
+      if( !_assert( $item[ $parent_id_key ] != $recursive, "cyclic crossreference detected for parent_id '{$parent_id_key}'" ) ){
+        $this->error = true; 
+        return $children;
+      }
+      if( !_assert( isset( $item[ $parent_id_key ] ), "parent_id key '{$parent_id_key}' not set in each array element...cannot build tree") ) return $children;
       if( $item[ $parent_id_key ] == $parent_id_value ){
         $weight     = $item[ $weight_key ];
         while( isset( $children[ $weight ] ) )
@@ -128,7 +141,8 @@ class treeManager{
     }
     // check if children have children
     foreach( $children as $key => $child ){
-      $children[ $key ]['children'] = $this->getChildren( $child[ $id_key ], $parent_id_key, $id_key, $weight_key, $array );
+      if( $this->error ) break;
+      $children[ $key ]['children'] = $this->getChildren( $child[ $id_key ], $parent_id_key, $id_key, $weight_key, $array, $parent_id_value );
     }
     ksort( $children );
     return $children;
