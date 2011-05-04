@@ -127,10 +127,11 @@ class treeManager{
     $children = array();
     // check if children look for their parent
     foreach( $array as $key => $item ){
-      if( !_assert( $item[ $parent_id_key ] != $recursive, "cyclic crossreference detected for parent_id '{$parent_id_key}'" ) ){
-        $this->error = true; 
-        return $children;
-      }
+      // *TODO* *FIXME* fix this bug
+      //if( !_assert( $item[ $parent_id_key ] != $recursive, "cyclic crossreference detected for parent_id '{$parent_id_key}'" ) ){
+      //  $this->error = true; 
+      //  return $children;
+      //}
       if( !_assert( isset( $item[ $parent_id_key ] ), "parent_id key '{$parent_id_key}' not set in each array element...cannot build tree") ) return $children;
       if( $item[ $parent_id_key ] == $parent_id_value ){
         $weight     = $item[ $weight_key ];
