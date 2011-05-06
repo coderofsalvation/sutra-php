@@ -1,0 +1,15 @@
+version: 1.0
+description: class which can resize/crop images
+note: |
+  example:
+  ========
+  $sutra->imageresize->setFile( "/your/path/yourimage.jpg" );
+  $sutra->imageresize->size_width( 200 );
+  $sutra->imageresize->process();
+  $sutra->imageresize->save(); // optionally pass new filename as arg
+
+  For more explanation how to use see /lib/core/imageresize/class.imageresize.php
+
+dependency:
+  mod: 
+  lib:
