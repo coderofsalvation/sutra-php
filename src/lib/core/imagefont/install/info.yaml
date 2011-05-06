@@ -1,0 +1,18 @@
+version: 1.04
+description: SEO friendly rendering of truetype fonts into images 
+note: |
+  Usage:
+
+    [some.tpl]
+
+      {imagefont tag="h1" text="This is a title" font="Arista.ttf" fontsize="24" bgcolor1="FFFFFF" fgcolor1="555555"}
+
+    [it can also render fonts with reflections if you install the 'reflection' lib]
+
+      {imagefont tag="h1" text="This is a title" font="Arista.ttf" fontsize="24" bgcolor1="FFFFFF" fgcolor1="555555"
+       reflection=true fade_start=20 fade_end=0 fade_height=30}
+
+autocreate:imagefont
+dependency:
+  mod: 
+  lib:
