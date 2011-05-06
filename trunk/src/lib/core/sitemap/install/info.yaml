@@ -1,0 +1,29 @@
+version: 1.03
+description: Sitemap library for generation of google sitemaps
+note:|
+  Usage: just listen to the "SUTRA_SITEMAP_GET_PAGES" event like this
+
+  [ PHP ]
+  -------------
+  class foo{
+    public function __construct(){
+      sutra::get()->event->addListener( "SUTRA_SITEMAP_GET_PAGES", $this, "addToSitemap" );
+    }
+
+    function addToSitemap(){
+      $sutra = sutra::get();
+      _assert( is_object($sutra->sitemap),"sitemap lib not available!");
+      $sutra->sitemap->data[] = array( "url"=> "some/url", "priority" => 1.0 );
+    }
+  }
+
+  For more examples see litesite-lib
+
+autocreate:sitemap
+dependency:
+  mod: 
+    - webpage:1.0
+  lib:
+    - yaml:1.0
+    - tpl:1.03
+    - session:1.0
