@@ -40,10 +40,10 @@
     {uicomponent  type="normal" help=`#help_title_url#` label=`#title_url#` label_id="title_url" }       
       <input type="text" id="title_url" name="title_url"   value="{$page.title_url}" onkeyup="this.value = $hyphenate( this.value );" {if $webpage.cfg.general.default_url == $page.title_url}disabled="disabled"{/if}/>     
     {/uicomponent}
-    {uicomponent  type="normal" help=`#help_meta_keywords#` label=`#meta_keywords#` label_id="meta_keywords" filter="advanced"}
+    {uicomponent  type="normal" help=`#help_meta_keywords#` label=`#meta_keywords#` label_id="meta_keywords"}
       <input type="text" id="meta_keywords" name="meta_keywords"       value="{$page.meta_keywords}"/>
     {/uicomponent}
-    {uicomponent  type="normal" help=`#help_meta_description#` label=`#meta_description#` label_id="meta_description" filter="advanced"}       
+    {uicomponent  type="normal" help=`#help_meta_description#` label=`#meta_description#` label_id="meta_description"}       
       <input type="text" id="meta_description" name="meta_description"       value="{$page.meta_description}"/>         
     {/uicomponent}
 
