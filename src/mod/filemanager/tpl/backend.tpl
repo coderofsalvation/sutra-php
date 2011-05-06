@@ -9,7 +9,7 @@
 {if isset($_GET.error_add)       }     {uinotify type="error"   content=`#error_add#`}       {/if}
 {if isset($_GET.error_noroot)    }     {uinotify type="error"   content=`#error_noroot#`}    {/if}
 
-{uicontainer    type="normal" description=`#module_description#` hidesubmit=true title=`#module_title#` }
+{uicontainer    type="normal" description=`#module_description#` hidesubmit=true title=`#module_title#` hideadvanced=true}
   {widget mod="filemanager" name="tree"}
   <br>
   {uicomponent type="file" method="POST" action="filemanager/backend?event=SUTRA_MOD_FILEMANAGER_SAVE" hide_table=true iframeId="response"}
@@ -22,7 +22,7 @@
 {literal}
 <style type="text/css">
   div#popupContent form input#file,
-  div#popupContent form select#path  { width:111px; float:left }
+  div#popupContent form select#path  { width:108px; float:left }
   div#popupContent form input#upload { margin-left:138px; }
   iframe#response                    { float:left; width:0px; height:0px; padding-top:2px }
 </style>
