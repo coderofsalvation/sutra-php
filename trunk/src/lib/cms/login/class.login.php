@@ -39,7 +39,7 @@ class login{
     $sutra  = sutra::get();
     $user   = new dbObject( "sutra_user" );
     $user->load( "username", $username );
-    if( isset($user->password) && $user->password == md5( $password ) ){
+    if( $password && isset($user->password) && $user->password == md5( $password ) && is_object($sutra->user) ){
       $user->copyTo( &$sutra->user );
       $_SESSION['user_id'] = $user->id;
       $sutra->session->close();
@@ -61,7 +61,7 @@ class login{
   public function popup(){
     $sutra    = sutra::get();
     $sutra->tpl->assign("small", true );
-    if( !strstr( $sutra->browser->get(), "Mozilla Firefox" ) && !strstr( $sutra->browser->get(), "Gecko" ) )
+    if( strstr( $sutra->browser->get(), "Internet Explorer" ) )
       $content = "<br><br>The admin functionaliteiten zijn alleen getest op Mozilla Firefox<br><br>Download het <a href='http://www.mozilla.com/'>hier</a>, en probeer opnieuw.";
     else 
       $content  = $sutra->tpl->fetch( "/lib/cms/login/tpl/login.tpl" );

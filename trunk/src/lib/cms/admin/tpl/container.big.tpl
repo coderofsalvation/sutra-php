@@ -1,23 +1,29 @@
-<h1 class="containerTitle">{$admin_title}</h1>{$uinotify}
+{imagefont tag="h1" text=$admin_title font="Arista.ttf" fontsize="24" bgcolor1="FFFFFF" fgcolor1="555555" reflection=true fade_start=20 fade_end=0 fade_height=30}
+{$uinotify}
 <div class="clear"></div>
-<div id="helpInfo" name="helpInfo" class="opacity-off">
-  <i>{$admin_description}</i>
-</div>
 
 {*<div name="page" class="cmsunit23 last padding margin-top margin-bottom">*}
 <div>
   <div align="right" id="filters">
-    {#advanced#}<input type="checkbox"  onclick="admin.toggleNames( 'advanced', this.checked )"><br>
-    {#help#}<input type="checkbox"  onclick="admin.toggleNames( 'helpInfo', this.checked, true ); admin.toggleNames( 'help', this.checked )" ><br>
+    {if !$admin_hideadvanced}
+    {#advanced#}&nbsp;&nbsp;<input type="checkbox" onclick="admin.toggleNames( 'advanced', this.checked )"><br>
+    {/if}
+    {#explanation#}&nbsp;&nbsp;<input type="checkbox"  onclick="admin.toggleNames( 'helpInfo', this.checked, true ); admin.toggleNames( 'help', this.checked )" ><br>
     {foreach from=$filter item="f"}
-      {$f|ucfirst}<input type="checkbox"  onclick="admin.toggleNames( '{$f}', this.checked );" ><br>
+      {$f|ucfirst}&nbsp;&nbsp;<input type="checkbox" onclick="admin.toggleNames( '{$f}', this.checked );" ><br>
+    {/foreach}
+    <div id="helpInfo" name="helpInfo" class="opacity-off">
+      <i>{$admin_description}</i>
+    </div>
+  </div>
+  {if is_array($link)}
+  <div align="right" class="padding-left" id="navigation">
+    {foreach from=$link item="l"}
+    <a href="{$l.href}" class="ajax" rel="popupContent">{$l.label|ucfirst}&nbsp;&laquo;</a><br>
     {/foreach}
   </div>
-  <div align="right" class="margin-top padding-left" id="navigation">
-<!--    <a href="" class="ajax" rel="popupContent">Some nav&nbsp;&laquo;</a><br>--> 
-<!--    <a href="" class="ajax" rel="popupContent">Some nav&nbsp;&laquo;</a><br>-->
-<!--    <a href="" class="ajax" rel="popupContent">Some nav&nbsp;&laquo;</a><br>-->
-  </div>
+  <br>
+  {/if}
   {$container_content}
 </div>
 {*</div>*}

@@ -40,12 +40,14 @@ div.hr                              { border-bottom:1px dotted #888; clear:both;
 a.button                            { border:1px solid #999; background-color:#FFF; color: #444; padding: 2px 10px 2px 10px; font-family: Verdana, Arial; font-weight:bold; font-size:11px; text-decoration:none; display:block; text-align:center; float:left; margin: 0px 10px 10px 0px; cursor:pointer}
 a.button:hover                      { background-color:#FFF; color:#444 }
 div#popupContent table td           { vertical-align: top; padding-bottom:10px; }
+div#popupContent h1                 { margin:0 }
 div#popupContent h1,
 div#popupContent div.message,
 div#popupContent div.messageContent { display:inline; float:left; line-height: 30px }
 div#popupContent img.messageIcon    { margin:-2px 7px 0px 10px; float:left }
 div#popupContent div#popupInfo      { display:inline }
-div#popupContent div#helpInfo       { margin-top:2px; }
+div#popupContent div#helpInfo       { margin-top:10px; text-align:right}
+div#popupContent div#filters        { line-height:20px }
 div#popupContent img#fileLoading    { float:right; }
 .opacity-off                        { -moz-opacity:.00; filter:alpha(opacity=00); opacity:.00; }
 .hide                               { display:none }
@@ -63,13 +65,25 @@ div#toolTip                         { border:3px solid #c0c0c0; background-color
 /* user interface text */
 div#popupContent *                  { font-size:14px; font-family:Arial; color:#000 }
 div#popupContent h1                 { font-size:24px; font-family:Verdana; color:#333}
-div#popupContent div#helpInfo *,
+div#popupContent div#helpInfo i     { font-size:12px; font-family:Verdana; color:#888 }
+div#popupContent button,
+div#popupContent input.submit      { background:url(../gfx/button.back.jpg); border:1px solid #000; cursor:pointer }
 div#popupContent input.action,
-div#popupContent button.action      { height: 50px; }
+div#popupContent button.action      { height: 50px; background:url(../gfx/button.back.big.jpg); border:1px solid #000; cursor:pointer }
 div#popupContent input,
 div#popupContent select,
 div#popupContent option,
-div#popupContent textarea           { font-size:12px; font-family:Arial }
+div#popupContent textarea           { font-size:12px; font-family:Arial 
+                                      border-radius: 4px; /* CSS3 compliant browsers */
+                                      behavior: url(curved.htc); /* IE Browsers */ 
+                                      border: 1px solid #444;
+                                      -moz-border-radius: 4px; /* firefox */ 
+                                      -webkit-border-radius: 4px; /* Google Chrome, Safari  */ 
+                                      -khtml-border-radius: 4px; /* Linux Browsers */ 
+                                      padding:2px 2px 2px 2px;
+
+                                    }
+div#popupContent input[type='file'] { border:none }
 div#popupContent div#overview *     { font-size:11px; }
 div.nicEdit-pane a:active,
 div.nicEdit-pane a:link,
@@ -92,3 +106,6 @@ div#popupContent div.arrows           { left:310px; margin-top:4px;}
 div#popupContent table.tree           { width:310px; }
 div.arrows img                        { padding:4px 2px 2px 2px; border:1px solid #F0F0F0 }
 div.arrows img:hover                  { border:1px solid #AAA; background-color:#FFF }
+
+/* fix bug loginscreen */
+div#popupContent input                                   { margin:0px 0px 0px 0px }
