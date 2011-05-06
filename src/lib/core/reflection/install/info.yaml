@@ -1,0 +1,12 @@
+version: 1.0
+description: adds 'wet-floor' reflections to images easily (also works with imagefont lib)
+note: |
+  Usage:
+   
+    <img src="/lib/core/reflection/reflect_v21.php?img=../../../tpl/front/gfx/image.gif"/>
+
+    for more info or options see: http://reflection.corephp.co.uk
+
+dependency:
+  mod: 
+  lib:
