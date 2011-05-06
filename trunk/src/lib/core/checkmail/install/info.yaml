@@ -1,0 +1,10 @@
+version: 1.04
+note: |
+  For explanation how to use see /lib/core/checkmail/checkmail.php
+
+description: checks mail and triggers events, great for automation of tasks
+dependency:
+  mod: 
+  lib:
+    - mail:1.0
+cfg: 
