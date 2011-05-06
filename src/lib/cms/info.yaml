@@ -1,13 +1,21 @@
-version: 0.9 
+version: 1.03
 note: |
+  CMS functionality installed!
+  ============================
+  (modules/widgets/backend/users/permissions/live page editing/datagrid/etc)
 
+  to start type : http://yoururl.com/admin
+  login/password: root/ilovesutra
 description: CMS functionality (modules/widgets/backend/users/permissions/live page editing/datagrid/etc)
+permissions: SUTRA_VIEW_PANEL,SUTRA_MOD_PAGE_EDIT,SUTRA_MOD_WRITE
+autocreate:login,acl,language,db,ajax,widget,mod,admin,popup,tooltip,datagrid,imagefont
 dependency:
   mod: 
     - webpage:1.0
     - pagemanager:1.0
     - filemanager:1.0
   lib:
+    - acl:1.0
     - yaml:1.0
     - tpl:1.0
     - ajax:1.0
@@ -33,3 +41,6 @@ dependency:
     - url:1.0
     - widget:1.0
     - yaml:1.0
+    - reflection:1.0
+    - imagefont:1.0
+    - browser:1.0
