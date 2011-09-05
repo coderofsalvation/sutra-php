@@ -1,0 +1,7 @@
+These are examples on how to create a testsuite using curl & (shell/php/perl)scripts together with the 'sutra test' cmd.
+
+USAGE: 
+
+$ sutra test `pwd`/test http://yoursite.com
+
+
