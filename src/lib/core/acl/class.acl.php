@@ -41,8 +41,8 @@ class acl{
     $this->groups       = array();
     $this->permissions  = array();
     $this->init( $sutra->yaml->cfg['acl']['groups'] );
-//    if( isset( $sutra->tpl ) ) 
-$sutra->tpl->register_block( "isAllowed", array( &$this, "tpl_isAllowed" ) );
+    if( isset( $sutra->tpl ) ) 
+      $sutra->tpl->register_block( "isAllowed", array( &$this, "tpl_isAllowed" ) );
     if( isset( $sutra->cli ) ) $sutra->event->addListener( "SUTRA_ACL_REQUEST", &$sutra->cli, "onACL" );
   }
 
@@ -55,7 +55,7 @@ $sutra->tpl->register_block( "isAllowed", array( &$this, "tpl_isAllowed" ) );
         $permissions = $sutra->string->parseToggleString( $group['permissions'], "," );
         $this->permissions = array_merge( $this->permissions, $permissions['enabled'] );
         $this->permissions = array_merge( $this->permissions, $permissions['disabled'] );
-      }
+      }else $permissions = array('enabled' => array(),'disabled' => array());
       $this->groups[ $groupname ]['_permissions']  = $permissions;
     }
     $this->permissions = array_unique( $this->permissions );
@@ -132,8 +132,8 @@ $sutra->tpl->register_block( "isAllowed", array( &$this, "tpl_isAllowed" ) );
     if( strlen($content) ){
       if( isset( $sutra->cli ) )
         $sutra->event->fire( "SUTRA_ACL_REQUEST", array( "permission" => $params['permission'], "src" => $tpl->_file ) );
-      if( $this->isAllowed( $params['permission'] ) )
-        return $content;
+      if( isset( $params['permission'] ) && $this->isAllowed( $params['permission'] ) ) return $content;
+      if( isset( $params['group'] ) ) return in_array( $sutra->user->group, explode(",", $params['group'] ) ) ? $content : "";
     }
   }
 
