@@ -7,13 +7,16 @@
  * Purpose:  simply obtain an objects var without worrying its species
  *           this is a lazy function, which will search for a variable/key in any variable/datatype
  */
-function tpl_modifier_getvar($obj, $var)
+function tpl_modifier_getvar($obj, $var, $empty_string = "")
 {
+  $out = "";
   if( is_array($obj) ){
 		if( !isset($obj[ $var ] ) )
-			return searchValue( $var, $obj );
-		else return $obj[ $var ];
-	}else return $obj->$var;
+			$out = searchValue( $var, $obj );
+		else $out = $obj[ $var ];
+	}else $out = (isset($obj->$var)) ? $obj->$var : false;
+  $out = !is_array($out) && !strlen( $out ) ? $empty_string : $out;
+  return $out;
 }
 
 function searchValue( $var, $container ){
