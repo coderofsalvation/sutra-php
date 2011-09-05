@@ -50,28 +50,31 @@ class dbObject{
 
   public function __get( $var ){
     dbObject::$_target = $this;
-    foreach( dbObject::$_decorators as $category )
-			foreach( $category as $decorator )
-				if( isset( $decorator->$var ) && $result = $decorator->$var )
-					return $result;
+    foreach( dbObject::$_decorators as $k => $category )
+      if( $k == dbObject::$_target->_tablename || $k == "global" )
+        foreach( $category as $decorator )
+          if( isset( $decorator->$var ) && $result = $decorator->$var )
+            return $result;
   }
 
   public function __set( $var, $value ){
     dbObject::$_target = $this;
     if( $var[0] != "_" )
       $this->$var = $value;
-    foreach( dbObject::$_decorators as $category )
-			foreach( $category as $decorator )
-				$decorator->$var = $value;
+    foreach( dbObject::$_decorators as $k => $category )
+      if( $k == dbObject::$_target->_tablename || $k == "global" )
+        foreach( $category as $decorator )
+          $decorator->$var = $value;
   }
 
   public function __call( $method, $args ){
     dbObject::$_target = $this;
     $response = array();
-    foreach( dbObject::$_decorators as $category )
-      foreach( $category as $decorator )
-        if( method_exists( $decorator, $method ) )
-          $response[ get_class( $decorator ) ] = call_user_func_array( array( &$decorator, $method ), $args );
+    foreach( dbObject::$_decorators as $k => $category )
+      if( $k == dbObject::$_target->_tablename || $k == "global" )
+        foreach( $category as $decorator )
+          if( method_exists( $decorator, $method ) )
+            $response[ get_class( $decorator ) ] = call_user_func_array( array( &$decorator, $method ), $args );
     return count($response) == 1 ? array_shift($response) : $response;
   }
 

@@ -45,6 +45,7 @@ class db{
       sutra::get()->event->fire( "DB_CONNECT_ERROR" );
     if( !_assert( mysql_select_db( $dbname ), "connected to db but dbname not correct, check config") )
       sutra::get()->event->fire( "DB_SELECT_ERROR" );
+    mysql_query("SET NAMES 'utf8'");
     $this->queries = array();
   }
 
