@@ -25,7 +25,7 @@ class tpl extends Template_Lite{
 
   public function resetInc(){
     $this->_data            = array( "php" => array(), "js" => array(), "css" => array() );
-    $this->_inlines         = array( "css" => array(), "js" => array() );
+    $this->_inlines         = array( "css" => array(), "js" => array(), "jsDomReady" => array() );
   }
 
   /*
@@ -86,13 +86,13 @@ class tpl extends Template_Lite{
     $out    = "<!-- dynamically includes -->\n";
     foreach( $this->_data as $lang => $arr ){
       switch( $lang ){
-        case "css": if( sutra::get()->yaml->cfg['global']['cache'] )
+        case "css": if( sutra::get()->yaml->cfg['global']['cache'] && is_object($sutra->compressor) )
                       $out .= $sutra->compressor->process( $arr, "css" );
                     else foreach( $arr as $file )
                       $out .= '    <link rel="stylesheet" href="'.$file.'" type="text/css" media="screen, projection">'."\n";  
                     break;
                     
-        case "js" : if( sutra::get()->yaml->cfg['global']['cache'] )
+        case "js" : if( sutra::get()->yaml->cfg['global']['cache'] && is_object($sutra->compressor) )
                       $out .= $sutra->compressor->process( $arr, "js" );
                     else foreach( $arr as $file )
                       $out .= '    <script type="text/javascript" src="'.$file.'"></script>'."\n";                             
@@ -109,19 +109,20 @@ class tpl extends Template_Lite{
   * @return void
   */
   private function fetchInline(){
-    $js     = $css = "";
+    $js     = $jsDomReady = $css = "";
     $sutra  = sutra::get();
     $out    = "<!-- dynamically inline code -->\n";
     foreach( $this->_inlines as $lang => $arr ){
-     foreach( $arr as $code ){
-       switch( $lang ){
-         case "css": $css  .= $code; break;
-         case "js" : $js   .= $code; break;
-       }
-     }
+      foreach( $arr as $code ){
+        switch( $lang ){
+          case "css": $css  .= $code; break;
+          case "js" : $js   .= $code; break;
+          case "jsDomReady" : $jsDomReady  .= $code; break;
+        }
+      }
     }
     $out  .= '    <link rel="stylesheet" type="text/css" media="screen, projection">'.$css."</style>\n";
-    $out  .= "    <script type=\"text/javascript\"> \nbaseurl = 'http://{$sutra->_url}';\nfunction init(){\n". $js ."\n}\n Event.domReady.add( init );\n</script>\n";
+    $out  .= "    <script type=\"text/javascript\"> \nbaseurl = 'http://{$sutra->_url}';\n{$js}\nfunction onDomReady(){\n". $jsDomReady ."\n}\n</script>\n";
     return $out;
   }
 
@@ -161,16 +162,21 @@ class tpl extends Template_Lite{
    */
   public function fetch( $file ){
     $sutra = sutra::get();
-    $file  = strstr( $file, $sutra->_path ) ? $file : "{$sutra->_path}/{$file}";
-    _assert( is_file($file) || is_file( "{$this->template_dir}/{$file}" ), "could not find file '{$file}'" );
-    $args     = array( "file" => $file, "custom" => array(), "filter" => array(), "var" => $this->_vars  );
+    if( !strstr( $file, $sutra->_path ) && $file[0] == "/" )
+      $file  = "{$sutra->_path}{$file}";
+    else if( !strstr( $file, $sutra->_path ) && $file[0] != "/" )
+      $file  = "{$this->template_dir}/{$file}";
+    _assert( is_file($file), "could not find file '{$file}'" );
+    // lets fire an event, so listeners can customize the final output by assigning/modifing extra template variables
+    $this->args          = !isset($this->args) ? array( "custom" => array(), "filter" => array(), "link" => array()  ) : $this->args;
+    $this->args['var']   = $this->_vars;
+    $this->args['file'] = $file;
     $this->assignDefaults();
-    sutra::get()->event->fire( "SUTRA_TPL_FETCH", &$args );
-    if( count($args['custom']) )
-      $this->assign( "custom", $args['custom'] );
-    if( count($args['filter']) )
-      $this->assign( "filter", $args['filter'] );
-    $output = parent::fetch( $file );
+    sutra::get()->event->fire( "SUTRA_TPL_FETCH", &$this->args );
+    // since other listeners were able to massage/add template variables, lets fetch the template
+    foreach( $this->args as $key => $value )
+      $this->assign( $key, $value );
+    $output = parent::fetch( $this->args['file'] );
     return $output;
   }
 
@@ -190,8 +196,10 @@ class tpl extends Template_Lite{
    */
   public function correctUrls( $content ){
     $rootdir = sutra::get()->yaml->cfg['global']['rootdir'];
-    $content = eregi_replace("href=['\"]\/([^'\"]*)['\"]","href='/{$rootdir}/\\1'", $content );
-    $content = eregi_replace("src=['\"]\/([^'\"]*)['\"]","src='/{$rootdir}/\\1'", $content );
+    $content = preg_replace("/href=['\"]\/([^'\"]*)['\"]/i","href='/{$rootdir}/\\1'", $content );
+    $content = preg_replace("/src=['\"]\/([^'\"]*)['\"]/i","src='/{$rootdir}/\\1'", $content );
+    $content = preg_replace("/action=['\"]\/([^'\"]*)['\"]/i","action='/{$rootdir}/\\1'", $content );
+    $content = preg_replace("/url\(['\"]\/([^'\"]*)['\"]/i","url('/{$rootdir}/\\1'", $content );
     // remove doubles *FIXME* because of bad ereg
     $content = str_replace( "{$rootdir}/{$rootdir}", $rootdir, $content );
     return $content;
