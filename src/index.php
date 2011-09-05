@@ -1,6 +1,7 @@
 <?php
 include_once("sutra.class.php");
 _log("sutra START!");
+
 $sutra = sutra::get();
 $sutra->init();
 $sutra->tpl->process( $sutra->page );

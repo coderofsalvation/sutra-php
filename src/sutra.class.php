@@ -54,11 +54,13 @@ class sutra{
           include_once( "{$inc}/autoload.php" );
         }else if( is_file( "{$inc}/class.{$var}.php" ) ){
           include_once( "{$inc}/class.{$var}.php" );
-          $this->$var = new $var();
+          if( _assert( class_exists( $var ), "want to create class '{$var}' but not declared in '{$inc}/class.{$var}.php'") )
+            $this->$var = new $var();
         }
         return $this->$var;
       }
     }
+    return false;
   }
 
   /*
@@ -69,21 +71,32 @@ class sutra{
    *                        So, the order of loading libs should be considered with care.
    *                        There are pros/cons for this 'routing' method, but there will be no problems if know what your doing :)
    */
-  function init(){
+  function init( $initlibs = true, $initmods = true ){
+    if( !$this->session ) session_start();
+    // load custom code
+    if( is_array( $this->yaml->cfg['patches'] ) )
+      foreach( $this->yaml->cfg['patches'] as $patch )
+        if( _assert( is_file( "{$this->_path}/{$patch}"), "cannot include patch {$this->_path}/{$patch}") )
+          include_once( "{$this->_path}/{$patch}" );
     $this->event->fire( "SUTRA_INIT" );
     // init generic stuff
     set_error_handler( array( $this->error, "handleError" ) );
     error_reporting ( E_ALL ^ E_NOTICE );
     date_default_timezone_set("Europe/Amsterdam");
+    // prevent confusion if run by commandline
+    $_SERVER['REQUEST_URI'] = !isset($_SERVER['REQUEST_URI']) ? "/" : $_SERVER['REQUEST_URI'];
+    $_SERVER['HTTP_HOST']   = !isset($_SERVER['HTTP_HOST']) ? "/" : $_SERVER['HTTP_HOST'];
     // set url, so the smarty filter can correct wrong urls, and enable relative paths
-    $this->_url     = $_SERVER['HTTP_HOST']."/".$this->yaml->cfg['global']['rootdir']."/";
+    $this->_url     = $_SERVER['HTTP_HOST']. ( $this->yaml->cfg['global']['rootdir'] != "/" ? "/".$this->yaml->cfg['global']['rootdir']."/" : "/");
     $libs           = $this->yaml->cfg['libs']['autocreate'];
     $this->_libdirs = array_merge( $this->_libdirs, $this->yaml->cfg['libs']['libdirs'] );
     // auto init libraries 
-    foreach( $libs as $lib )
-      if( !$this->done )$this->$lib;
+    if( $initlibs )
+      foreach( $libs as $lib )
+        if( !$this->done )$this->$lib;
     $this->event->fire( "SUTRA_INIT_LIBS" );
-    $this->event->fire( "SUTRA_INIT_MODULES" );
+    if( $initmods )
+      $this->event->fire( "SUTRA_INIT_MODULES" );
     // lets give libs a chance who want to react to certains url
     if( !$this->done ) $this->event->fire( "SUTRA_URL", $this->url ? $this->url->get() : "please install url lib!" );
     // notify listening modules with init event (most likely the page module)
