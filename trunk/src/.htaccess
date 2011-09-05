@@ -10,7 +10,7 @@ SetOutputFilter DEFLATE
 </FilesMatch>
 
 RewriteEngine on
-RewriteBase /coding/projects/sutra/src/
+#RewriteBase /your/subdir/from/rooturl
 RewriteRule ^data/upload(.*) - [L]
 RewriteRule ^lib(.*) - [L]
 RewriteRule ^admin?$ index.php?admin=1 [L]
