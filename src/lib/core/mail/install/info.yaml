@@ -1,4 +1,4 @@
-version: 1.0
+version: 1.1
 description: PHPMailer, easy mailing of text/html
 note:
 dependency:
