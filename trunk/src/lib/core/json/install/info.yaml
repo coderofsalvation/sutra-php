@@ -1,4 +1,4 @@
-version: 1.0
+version: 1.01
 description: json encoding/decoding library (handy for communication javascript<->PHP<->flash)
 note:
 dependency:
