@@ -1,4 +1,4 @@
-version: 1.0
+version: 1.01
 note: |
   ACL (Acces Control List) is basically a mechanism of limiting functionality per role/group.
 
@@ -11,3 +11,28 @@ dependency:
   lib:
     - yaml:1.0
     - tpl:1.0
+cfg: 
+  comment: |
+    ## GLOBAL ACL      -  (Acces Control list) permits user access to certain functionality
+    ##
+    ## if you want to limit functionality, add a keyword/eventname to a permissionlist and invoke
+    ## if( ! sutra::get()->acl->isAllowed( "someKeyword" ) ) die("not allowed!")
+    ##
+    ## NOTE #1: 'all' is a special keyword, its a shortcut for all acl permissions
+    ## NOTE #2: do not add keywords for modules here, but instead do in the mod's configfile
+    ##
+    ########################################################################################################################
+  acl: 
+    groups: 
+      root: 
+        copy: all
+        permissions: 
+      admin: 
+        copy: root
+        permissions: -SUTRA_DEVELOPER
+      member: 
+        copy: 
+        permissions: 
+      user: 
+        copy: 
+        permissions: roleX
