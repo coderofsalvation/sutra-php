@@ -56,20 +56,27 @@ class datagrid {
 		$sutra->tpl->register_function( "column",				array( $this, "smartyColumn" ) );
 		$sutra->tpl->register_function( "columnvalue",	array( $this, "smartyColumnValue" ) );
 		$sutra->tpl->register_function( "pagination",   array( $this, "smartyPagination" ) );
+    $sutra->event->addListener( "SUTRA_TPL_FETCH", $this, "addFilters" );
 	}
 
 	public function smartyDataGrid( $args, $tpl ){
-		if( _assert( isset( $args['mod'] ) && isset( $args['function'] ), "{datagrid} needs attribute tags 'mod' and 'function'") ){
+		if( _assert( isset( $args['class'] ) && isset( $args['function'] ), "{datagrid} needs attribute tags 'mod' and 'function'") ){
 			$sutra    = sutra::get();
-			$mod      = $args['mod'];
+      $input    = array_merge( $_POST, $_GET );
+			$class    = $args['class'];
+			$class    = is_object( $sutra->mod->$class ) ? $sutra->mod->$class : $sutra->$class;
 			$function = $args['function'];
-
+			_assert( is_object($class), "datagrid 'class' ({$args['class']}) variable could not be found!");
+		  if( isset($args['searchUrl']) && $args['searchUrl'] ) $sutra->tpl->assign( "searchUrl", $args['searchUrl'] );
+      if( isset($input['search']) ) $sutra->tpl->assign("search", $input['search'] );
 			if( $this->pagination != null ){
-				$this->pagination->recordCount = call_user_method( $function, $sutra->mod->$mod, false, false, true ); 
+				$this->pagination->recordCount = call_user_method( $function, $class, false, false, true ); 
 				$this->pagination->generate();
-		    $data     = call_user_method( $function, $sutra->mod->$mod, $this->pagination->queryOffset, $this->pagination->queryAmount );
-				$sutra->tpl->assign("pagination" , 				$this->pagination->displayArray );
-				$sutra->tpl->assign("paginationCurrent" , $this->pagination->currentPage );
+		    $data     = call_user_method( $function, $class, $this->pagination->queryOffset, $this->pagination->queryAmount );
+				 $sutra->tpl->assign("pagination" ,            $this->pagination->displayArray );
+				 $sutra->tpl->assign("paginationCurrent",      $this->pagination->currentPage );
+				 $sutra->tpl->assign("paginationCount",        $this->pagination->pageCount );
+				 $sutra->tpl->assign("paginationItemsPerPage", $this->pagination->itemsPerPage );
 		  }else $data     = call_user_method( $function, $sutra->mod->$mod, false, false );
 		  $sutra->tpl->assign("columns"    , $this->columns );
 			$sutra->tpl->assign("data"       , $data );
@@ -81,6 +88,7 @@ class datagrid {
 	public function smartyColumn( $args, $tpl ){
 		_assert( isset($args['width']) && isset( $args['name'] ), "please use name='yourcolumnname' in {column} tags");
 		$args['width'] = sprintf( "%02d", $args['width'] );
+    $args['autoclick'] = !isset( $args['tpl'] );
 		$this->columns[] = $args;
 	}
 
@@ -106,10 +114,12 @@ class datagrid {
 				$finalVar = $vars[1];
 			}
       $result       = $dataProvider->$var;
-      $result 			= $isArray ? $result[0]->$finalVar : $result;
+      $result 			= !$result ? "" : ($isArray ? $result[0]->$finalVar : $result);
       // truncate output if 'truncate' attribute is set
 			if( $result && isset($args['column']['truncate']) )
-				$result     = substr( $result, 0, $args['column']['truncate'] ) . "..";
+				$result     = strlen( $result ) > $args['column']['truncate'] ? substr( $result, 0, $args['column']['truncate'] ) . ".." : $result;
+      if( !$result || strlen($result) < 1 )
+        $result = isset($args['column']['default'] ) ? $args['column']['default'] : "(empty)";
       // assign the column to the template engine (so the 'tpl' attribute can benefit from this)
       $sutra->tpl->assign( $args['column']['var'], $result );
 		  return $result;
@@ -126,6 +136,12 @@ class datagrid {
 		$this->pagination->itemsPerPage = (int)$args['itemsPerPage'];
 		$this->pagination->currentPage  = (int)$args['currentPage'] == 0 ? 1 : (int)$args['currentPage'];
 	}
+
+  public function addFilters( $args ){
+    if( strstr( $args['file'], "lib/core/datagrid/tpl/container.tpl" ) ){
+      $args['filter'][] = "zoeken";
+    }
+  }
 
 }
 
