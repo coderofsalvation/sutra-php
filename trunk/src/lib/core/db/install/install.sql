@@ -1,0 +1,1 @@
+-- Dummy file to trigger database creation by CLI scripts

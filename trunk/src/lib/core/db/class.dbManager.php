@@ -46,11 +46,11 @@ class dbManager{
    * @access public
    * @return void
    */
-  public function populate( $values, $stripPrefix = "" ){
+  public function populate( $values, $stripPrefix = "", $urldecode = true ){
     foreach( $values as $key => $item ){
       if( $stripPrefix != "" )
         $key = str_replace( $stripPrefix, "", $key );
-      dbObject::$_target->$key = $item;
+      dbObject::$_target->$key = $urldecode && is_string($item) ? urldecode($item) : $item;
       $this->$key = $item; // enable decorators __set() function to respond
     }
     return dbObject::$_target;
@@ -187,9 +187,10 @@ class dbManager{
                                                                  "tableTo"    => $tableTo,
                                                                  "columnTo"   => $columnTo );
   }
-  public function load( $column , $value ){
+  public function load( $column , $value, $parseYaml = true ){
+    $value  = sutra::get()->db->escapeString( $value );
     $target = dbObject::$_target;
-    $out = sutra::get()->db->getArray(  "SELECT * FROM `{$target->_tablename}` WHERE `{$column}` = '{$value}' LIMIT 1", false );
+    $out = sutra::get()->db->getArray(  "SELECT * FROM `{$target->_tablename}` WHERE `{$column}` = '{$value}' LIMIT 1", false, $parseYaml );
     if( count($out) ) $this->populate( (array)$out[0] );
     return dbObject::$_target;
   }
@@ -221,6 +222,9 @@ class dbManager{
   public function loadByProperty( $column, $value, $orderBy = false, $orderDirection = "ASC", $amount = false, $offset = false, $returnObjs = true, $parseYaml = true ){
     _assert( !($offset === false && $amount ) , "loadByColumn() please use \$amount AND \$offset" );
     _assert( strlen( dbObject::$_target->_tablename ) > 0, "loadByProperty() no tablename specified in \$this->_tablename" );
+    $values     = array('column', 'value','orderBy','orderDirection','amount','offset');
+    foreach( $values as $v ) if( $$v ) sutra::get()->db->escapeString( $$v );
+    $value      = sutra::get()->db->escapeString( $value );
     $target     = dbObject::$_target;
     $where      = "";
     if( $column && $value && $value != "*" )
