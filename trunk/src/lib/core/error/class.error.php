@@ -26,6 +26,7 @@ class error{
  
   var $email        = array("info@leon.vankammen.eu");
   var $ignoreJS     = true;
+  var $cacheUrlMax  = 3;
   var $ignoreFiles  = array("class.template.php");
   var $cssEmail     = "margin:10px;padding:10px;font-size:11px;border:1px dotted #555;background-color:#F0F0F0;font-family:Terminal,Courier;color:#555";
   var $cssBrowser   = "margin:10px;padding:10px;font-size:8px;background-color:#F0F0F0;font-family:Terminal,Courier;color:#555";
@@ -43,8 +44,8 @@ class error{
                           "E_USER_ERROR"        => array(  1,     0,     0,     1 ),
                           "E_USER_WARNING"      => array(  1,     0,     0,     1 ),
                           "E_USER_NOTICE"       => array(  1,     0,     0,     1 ),
-                          "E_JAVASCRIPT_ERROR"  => array(  0,     1,     0,     1 ),
-                          "E_JAVASCRIPT_ASSERT" => array(  0,     1,     0,     1 ),
+                          "E_JAVASCRIPT_ERROR"  => array(  0,     0,     0,     1 ),
+                          "E_JAVASCRIPT_ASSERT" => array(  0,     0,     0,     1 ),
                           "E_STRICT"            => array(  0,     0,     0,     0 ),
                           "E_RECOVERABLE_ERROR" => array(  0,     0,     0,     0 ),
                           "E_DEPRECATED"        => array(  0,     0,     0,     0 ),
@@ -125,6 +126,12 @@ class error{
         print str_pad( "{$step['function']}( ". gettype( $step['args'] )." )", 30) . "=> {$step['file']}: {$step['line']}\n";
     }
     if( $verbose ){
+      print "\n\nURL\n===\n\n";
+      print date( DATE_RFC822, time())." > {$_SERVER['REQUEST_URI']}";
+      if( is_object($sutra->db) ){
+        print "\n\n\$_QUERIES\n========\n\n";
+        print_r($sutra->db->queries);
+      }
       print "\n\n\$_SERVER\n========\n\n";
       print_r($_SERVER);
       print "\n\n\$_GET\n======\n\n";
@@ -157,8 +164,7 @@ class error{
     if( self::$emailCount > 10 || in_array( $id, self::$emailCache ) ) return;
     $sutra  = sutra::get();
     $mail   = sutra::get()->mail;
-    $mail->From     = $sutra->_url;
-    $mail->FromName = $sutra->_url;
+    $mail->From = $mail->FromName  = "error@".$sutra->yaml->cfg['global']['short_domain'];
     foreach( $this->email as $email )
       $mail->AddAddress( $email );
     $mail->Subject = "SUTRA " . substr( $message, 0, 40 ) . "..";
