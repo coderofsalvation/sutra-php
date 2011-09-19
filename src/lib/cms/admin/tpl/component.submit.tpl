@@ -2,7 +2,7 @@
     <tr>
       <td class="cmsunit09">&nbsp;</td>
       <td>
-        <button class="action" onclick="window.$validateForm( '{$admin_formId}' ) && window.ajax.doRequest( $sutra( '{$admin_formId}' ).action.replace('http://'+document.location.hostname,''), $formToString( '{$admin_formId}' ), $sutra( '{$admin_formId}' ).method, 'popupContent' );"/>
+        <button class="action curved" onclick="if( window.$validateForm( '{$admin_formId}' ) ) window.ajax.doRequest( $sutra( '{$admin_formId}' ).action.replace('http://'+document.location.hostname,''), $formToString( '{$admin_formId}' ), $sutra( '{$admin_formId}' ).method, 'popupContent' );"/>
           {$component_content}
         </button>
       </td>
