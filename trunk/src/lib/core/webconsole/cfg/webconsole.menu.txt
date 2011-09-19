@@ -1,0 +1,15 @@
+   %c(cyan)
+   ____ _  _ ___ ____ ____   ____ ____ ____ _  _ ____ _  _ ____ ____ _  _%c(white)
+   ==== |__|  |  |--< |--|   |--- |--< |--| |\/| |=== |/\| [__] |--< |-:_%c(default)
+   more info @ %+|<a href='http://www.sutraphp.com' target=a>www.sutraphp.com</a>%-|
+
+   ----------------------------------------------------------------------
+
+   %c(cyan)[ %c(default)M %c(cyan)] %c(default)%+|<a href="#" onclick="myterm.navigate('M')">This menu</a>%-|                %c(cyan)[ %c(default)H %c(cyan)] %c(default)%+|<a href="#" onclick="myterm.navigate('H')">Help</a>%-|
+   %c(cyan)[ %c(default)S %c(cyan)] %c(default)%+|<a href="#" onclick="myterm.navigate('S')">Server vars</a>%-|              %c(cyan)[ %c(default)  %c(cyan)] %c(default)%+|<a href="http://www.sutraphp.com/easy" target=a>Cheatsheet #1</a>%-|
+   %c(cyan)[ %c(default)E %c(cyan)] %c(default)%+|<a href="#" onclick="myterm.navigate('E')">Session vars</a>%-|             %c(cyan)[ %c(default)  %c(cyan)] %c(default)%+|<a href="http://www.sutraphp.com/advanced" target=a>Cheatsheet #2</a>%-|
+   %c(cyan)[ %c(default)U %c(cyan)] %c(default)%+|<a href="#" onclick="myterm.navigate('U')">Sutra vars</a>%-|               %c(cyan)[ %c(default)  %c(cyan)] %c(default)%+|<a href="#" onclick="myterm.navigate('J')">Javascript test</a>%-|
+   %c(cyan)[ %c(default)L %c(cyan)] %c(default)%+|<a href="#" onclick="myterm.navigate('L')">Log </a>%-|                     
+
+   %c(red)NOTE: %c(default)%+|<a href="http://hu.php.net/system" target="a">be carefull with system(..) calls (you have been warned)</a>%-| 
+

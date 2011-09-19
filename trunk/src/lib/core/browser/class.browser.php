@@ -1,4 +1,49 @@
 <?php
+/** 
+ * File:        class.browser.php
+ * Date:        Mon Sep 19 16:40:00 2011
+ *
+ * detects browser properties
+ * 
+ * Changelog:
+ *
+ * 	[Mon Sep 19 16:40:00 2011] 
+ *		first sketch from scratch
+ *
+ * @todo description
+ *
+ * Usage example: 
+ * <code>  
+ *   // some code
+ * </code>
+ *
+ * @version $id$
+ * @copyright 2011 Coder of Salvation
+ * @author Coder of Salvation, sqz <info@leon.vankammen.eu>
+ * @package sutra
+ * 
+ * ____ _  _ ___ ____ ____   ____ ____ ____ _  _ ____ _  _ ____ ____ _  _
+ * ==== |__|  |  |--< |--|   |--- |--< |--| |\/| |=== |/\| [__] |--< |-:_
+ * 
+ * @license 
+ *  *
+ * Copyright (C) 2011, Sutra Framework < info@sutraphp.com | www.sutraphp.com >
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+
+ */
 
 class browser
 {
@@ -16,7 +61,7 @@ class browser
   {
     $useragent = $useragent ? $useragent : $_SERVER['HTTP_USER_AGENT'];
     $matches = '';
-    //check for most popular browsers first
+    // check for most popular browsers first
     //unfortunately that's ie. We also ignore opera and netscape 8
     //because they sometimes send msie agent
     if(strpos($useragent,"MSIE") !== false && strpos($useragent,"Opera") === false && strpos($useragent,"Netscape") === false)
@@ -181,6 +226,111 @@ class browser
       return false;
     }
   }
+
+  /**
+   * isMobile  - determine if user agent is mobile
+   * 
+   * @access public
+   * @return void
+   */
+  function isMobile(){
+    $isMobile = false;
+
+    $op = isset($_SERVER['HTTP_X_OPERAMINI_PHONE']) ? strtolower($_SERVER['HTTP_X_OPERAMINI_PHONE']) : "";
+    $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+    $ac = strtolower($_SERVER['HTTP_ACCEPT']);
+    $ip = $_SERVER['REMOTE_ADDR'];
+
+    $isMobile = strpos($ac, 'application/vnd.wap.xhtml+xml') !== false
+        || $op != ''
+        || strpos($ua, 'sony') !== false 
+        || strpos($ua, 'symbian') !== false 
+        || strpos($ua, 'nokia') !== false 
+        || strpos($ua, 'samsung') !== false 
+        || strpos($ua, 'mobile') !== false
+        || strpos($ua, 'windows ce') !== false
+        || strpos($ua, 'epoc') !== false
+        || strpos($ua, 'opera mini') !== false
+        || strpos($ua, 'nitro') !== false
+        || strpos($ua, 'j2me') !== false
+        || strpos($ua, 'midp-') !== false
+        || strpos($ua, 'cldc-') !== false
+        || strpos($ua, 'netfront') !== false
+        || strpos($ua, 'mot') !== false
+        || strpos($ua, 'up.browser') !== false
+        || strpos($ua, 'up.link') !== false
+        || strpos($ua, 'audiovox') !== false
+        || strpos($ua, 'blackberry') !== false
+        || strpos($ua, 'ericsson,') !== false
+        || strpos($ua, 'panasonic') !== false
+        || strpos($ua, 'philips') !== false
+        || strpos($ua, 'sanyo') !== false
+        || strpos($ua, 'sharp') !== false
+        || strpos($ua, 'sie-') !== false
+        || strpos($ua, 'portalmmm') !== false
+        || strpos($ua, 'blazer') !== false
+        || strpos($ua, 'avantgo') !== false
+        || strpos($ua, 'danger') !== false
+        || strpos($ua, 'palm') !== false
+        || strpos($ua, 'series60') !== false
+        || strpos($ua, 'palmsource') !== false
+        || strpos($ua, 'pocketpc') !== false
+        || strpos($ua, 'smartphone') !== false
+        || strpos($ua, 'rover') !== false
+        || strpos($ua, 'ipaq') !== false
+        || strpos($ua, 'au-mic,') !== false
+        || strpos($ua, 'alcatel') !== false
+        || strpos($ua, 'ericy') !== false
+        || strpos($ua, 'up.link') !== false
+        || strpos($ua, 'vodafone/') !== false
+        || strpos($ua, 'wap1.') !== false
+        || strpos($ua, 'wap2.') !== false;
+    return $isMobile;
+  }
+
+  function isBot(){
+    $isBot = false;
+
+    $op = strtolower($_SERVER['HTTP_X_OPERAMINI_PHONE']);
+    $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+    $ac = strtolower($_SERVER['HTTP_ACCEPT']);
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $isBot =  $ip == '66.249.65.39' 
+    || strpos($ua, 'googlebot') !== false 
+    || strpos($ua, 'mediapartners') !== false 
+    || strpos($ua, 'yahooysmcm') !== false 
+    || strpos($ua, 'baiduspider') !== false
+    || strpos($ua, 'msnbot') !== false
+    || strpos($ua, 'slurp') !== false
+    || strpos($ua, 'ask') !== false
+    || strpos($ua, 'teoma') !== false
+    || strpos($ua, 'spider') !== false 
+    || strpos($ua, 'heritrix') !== false 
+    || strpos($ua, 'attentio') !== false 
+    || strpos($ua, 'twiceler') !== false 
+    || strpos($ua, 'irlbot') !== false 
+    || strpos($ua, 'fast crawler') !== false                        
+    || strpos($ua, 'fastmobilecrawl') !== false 
+    || strpos($ua, 'jumpbot') !== false
+    || strpos($ua, 'googlebot-mobile') !== false
+    || strpos($ua, 'yahooseeker') !== false
+    || strpos($ua, 'motionbot') !== false
+    || strpos($ua, 'mediobot') !== false
+    || strpos($ua, 'chtml generic') !== false
+    || strpos($ua, 'nokia6230i/. fast crawler') !== false;
+    return $isBot;
+  }
+
+  function supportWAP(){
+    return ( (strpos( strtolower($_SERVER['HTTP_ACCEPT']),'pplication/vnd.wap.xhtml+xml')>0 ) ||
+             ( (isset( $_SERVER['HTTP_X_WAP_PROFILE'] ) || isset($_SERVER['HTTP_PROFILE']) ) ) );
+  }
+
+  function supportHTML(){
+    return ( ( strpos( strtolower($_SERVER['HTTP_ACCEPT']),'pplication/xhtml+xml') >0 ) ||
+             ( strpos( strtolower($_SERVER['HTTP_ACCEPT']),'ext/html') >0 ) );
+  }
+
 }
 
 ?>

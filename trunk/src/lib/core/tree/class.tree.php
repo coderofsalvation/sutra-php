@@ -38,7 +38,25 @@
  *  {tree data=$data}  {* you can switch themes by adding tpl="windows"/"doxygen" *}
  * </code>
  *
- * @package IZIFramework 
+ * @package sutra 
+ * @license
+ *  *
+ * Copyright (C) 2011, Sutra Framework < info@sutraphp.com | www.sutraphp.com >
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+
  */
 class tree{
 
@@ -63,10 +81,11 @@ class tree{
       $params['id']  = "tree";
     $jdata = $sutra->json->encode( $params['data'] );
     $html  = "<div id='tree'></div>\n";
-    $html .= "<script src='/lib/core/tree/js/tree-src.js' type='text/javascript' ></script>\n";
-    // $html .= "<script type='text/javascript' src='lib/core/tree/js/tree.js'></script>\n";
-    $html .= "<script src='/lib/core/tree/tpl/{$params['tpl']}/tree_tpl.js' type='text/javascript' ></script>\n";
-    $html .= "<script type='text/javascript'>new tree( {$jdata}, TREE_TPL, '{$params['id']}'";
+    $html .= "<script type='text/javascript'>";
+    $html .= "var baseurl = 'http://".$sutra->_url."';\n";
+    $html .= file_get_contents( $sutra->_path."/lib/core/tree/js/tree-src.js" );
+    $html .= file_get_contents( $sutra->_path."/lib/core/tree/tpl/{$params['tpl']}/tree_tpl.js" );
+    $html .= "new tree( {$jdata}, TREE_TPL, '{$params['id']}'";
     $html .= ( isset( $params['ajaxTarget'] )   ? ", '{$params['ajaxTarget']}'"  : ", false" );
     $html .= ( isset( $params['onClick']    )   ? ", '{$params['onClick']}'"     : ", false" );
     $html .= ( isset( $params['onDelete']   )   ? ", '{$params['onDelete']}'"    : ", false" );
@@ -76,7 +95,8 @@ class tree{
     $html .= ( isset( $params['rootUrl']    )   ? ", '{$params['rootUrl']}'"     : ", 'http://{$sutra->_url}'" );
     $html .= ( isset( $params['target']     )   ? ", '{$params['target']}'"      : ", false" );
     $html .= ( isset( $params['parentClick'] )  ? ", '{$params['parentClick']}'" : ", false" );
-    $html .= " ) </script>";
+    $html .= " );";
+    $html .= "</script>";
     $html .= "<link rel='stylesheet' href='http://{$sutra->_url}lib/core/tree/css/tree.css' type='text/css' media='screen, projection'/>";
     return $html;
   }

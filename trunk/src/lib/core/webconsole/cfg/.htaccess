@@ -1,0 +1,5 @@
+AuthName "Please login"
+AuthType Basic
+AuthUserFile /home/sqz/www/coding/projects/sutra/src/lib/core/webconsole/cfg/.htpasswd
+
+require valid-user

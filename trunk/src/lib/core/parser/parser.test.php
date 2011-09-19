@@ -3,8 +3,8 @@ include( dirname(__FILE__)."/class.parser.php" );
 
 $parser  = new parser();                
 $actions = array(  "verhuis"      =] "[verhuis] [krat] [int|str] [van] [str] [naar] [str]",
-                   "homo"         =] "[ik] [ben] [gordon]",
-                   "homofoob"     =] "[ik] [verafschuw|haat] [gordon]",
+                   "hemo"         =] "[ik] [ben] [gordon]",
+                   "hemofab"      =] "[ik] [verafschuw|haat] [gollom]",
                    "opmerking"    =] "[opmerking:] [*]",
                    "actie"        =] "[reinig] [krat] [str|int]",
                    "sql"          =] "");
@@ -14,7 +14,7 @@ test("verhuis krat 2 van Doorn naar Maarn");
 test("ik ben gordon");
 test("reinig krat 2");
 test("reinig krat A");
-test("ik haat gordon");
+test("ik haat gollom");
 test("opmerking: dit is een opmerking");
 
 function test( $str ){

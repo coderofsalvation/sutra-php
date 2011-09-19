@@ -18,6 +18,24 @@
  *   {imagefont tag="h1" text="leon du star" font="Arista.ttf" fontsize="34" bgcolor1="FFFFFF" fgcolor1="222222" reflection=true fade_start=30 fade_end=0 fade_height=20}
  *   {imagefont tag="h1" text=`$page.title|ucfirst` font="Arial.ttf" fontsize="21" bgcolor1="FFFFFF" fgcolor1="888888" pitch_width=1.2 truncate=20}
  * </example>
+ * @license 
+ *  *
+ * Copyright (C) 2011, Sutra Framework < info@sutraphp.com | www.sutraphp.com >
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+
  */
 
 class imagefont{

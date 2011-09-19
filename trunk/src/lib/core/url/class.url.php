@@ -1,6 +1,6 @@
 <?
 /** 
- * File:        <#file#>.php
+ * File:        class.url.php
  * Date:        Thu Jun  4 20:48:32 2009
  *
  * splittfies url for working with SEO-friendly urls
@@ -18,7 +18,25 @@
  *   $params = sutra::get()->url->get("http://www.google.com/some/param/blah");
  * </code>
  *
- * @package IZIFramework 
+ * @package sutra
+ * @license
+ *  *
+ * Copyright (C) 2011, Sutra Framework < info@sutraphp.com | www.sutraphp.com >
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+
  */
 
 class url{
@@ -50,7 +68,7 @@ class url{
     if( strlen($url) == 0 )
       $this->params   = false;
     else
-      $this->params   =  strstr( $url, "/" ) ? split("/", $url ) : array($url);
+      $this->params   =  strstr( $url, "/" ) ? explode("/", $url ) : array($url);
     return $this->params;
   }
 

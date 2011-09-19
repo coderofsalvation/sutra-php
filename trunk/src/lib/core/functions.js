@@ -1,3 +1,46 @@
+/** 
+ * File:        functions.js
+ * Date:        Mon Sep 19 17:02:28 2011
+ *
+ * simple javascript functions ( works perfectly together with jquery/mootools etc)
+ * it purpose: basic domready / mobile / js stuff.
+ * 
+ * Changelog:
+ *
+ * 	[Mon Sep 19 17:02:28 2011] 
+ *		first sketch from scratch
+ *
+ * @todo description
+ *
+ *
+ * @version $id$
+ * @copyright 2011 Coder of Salvation
+ * @author Coder of Salvation, sqz <info@leon.vankammen.eu>
+ * @package sutra
+ * 
+ * ____ _  _ ___ ____ ____   ____ ____ ____ _  _ ____ _  _ ____ ____ _  _
+ * ==== |__|  |  |--< |--|   |--- |--< |--| |\/| |=== |/\| [__] |--< |-:_
+ * 
+ * @license 
+ *  *
+ * Copyright (C) 2011, Sutra Framework < info@sutraphp.com | www.sutraphp.com >
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+
+ */
+
 /**  MICRO SUTRA FRAMEWORK BY THE CODER OF SALVATION : minimalistic, nonobtrusive, easily co-exists with prof.frameworks 
 /**/ var tplVars   =                              {}
 /**/ var domLoaded = function (callback)          {  /* Internet Explorer */  /*@cc_on  @if (@_win32 || @_win64)    document.write('<script id="ieScriptLoad" defer src="//:"><\/script>');    document.getElementById('ieScriptLoad').onreadystatechange = function() {      if (this.readyState == 'complete') {        callback();      }    };    return;  @end @*/  /* Mozilla, Chrome, Opera */  if (document.addEventListener) {    document.addEventListener('DOMContentLoaded', callback, false);    return;  }  /* Safari, iCab, Konqueror */  if (/KHTML|WebKit|iCab/i.test(navigator.userAgent)) {    var DOMLoadTimer = setInterval(function () {      if (/loaded|complete/i.test(document.readyState)) {        callback();        clearInterval(DOMLoadTimer);      }    }, 10);    return;  }  /* Other web browsers */  window.onload = callback;};
