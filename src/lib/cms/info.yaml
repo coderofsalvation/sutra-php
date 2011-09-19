@@ -1,5 +1,10 @@
 version: 1.05
 note: |
+  WARNING: ***HUGE BETA PACKAGE*** : 
+    - needs more testing
+    - needs more language added
+    - needs automatic installer!
+
   CMS functionality installed!
   ============================
   (modules/widgets/backend/users/permissions/live page editing/datagrid/etc)
