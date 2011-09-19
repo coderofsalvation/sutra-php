@@ -1,0 +1,75 @@
+.opacity-half        { -moz-opacity:.85; filter:alpha(opacity=85); opacity:.85; }
+
+.lh15 {
+	line-height: 15px;
+}
+
+img#termLoader{
+  z-index:2;
+  position: absolute;
+  top: 10px;
+  left:10px;
+}
+
+div#termDiv{
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  line-height:17px
+}
+
+.term {
+	font-family: "Courier New",courier,fixed,monospace;
+	font-size: 12px;
+	color: #CCCCCC;
+	background: none;
+	letter-spacing: 1px;
+}
+.term .termReverse {
+	color: #222222;
+	background: #27ffff;
+}
+
+a,a:link,a:visited {
+	text-decoration: none;
+	color: #27ffff
+}
+a:hover {
+	text-decoration: underline;
+	color: #27ffff
+}
+a:active {
+	text-decoration: underline;
+	color: #eeeeee;
+}
+
+a.termopen,a.termopen:link,a.termopen:visited {
+	text-decoration: none;
+	color: #27ffff
+}
+a.termopen:hover {
+	text-decoration: none;
+	color: #222222;
+	background: #77dd11;
+}
+a.termopen:active {
+	text-decoration: none;
+	color: #222222;
+	background: #eeeeee;
+}
+
+table.inventory td {
+	padding-bottom: 20px !important;
+}
+
+tt,pre {
+	font-family: courier,fixed,monospace;
+	color: #ccffaa;
+	font-size: 12px;
+	line-height: 15px;
+}
+
+.dimmed,.dimmed *,.dimmed * * {
+	background-color: #222222 !important;
+	color: #333333 !important;
+}

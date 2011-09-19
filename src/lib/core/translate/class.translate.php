@@ -25,30 +25,49 @@
  * ____ _  _ ___ ____ ____   ____ ____ ____ _  _ ____ _  _ ____ ____ _  _
  * ==== |__|  |  |--< |--|   |--- |--< |--| |\/| |=== |/\| [__] |--< |-:_
  * 
- * @license Coder Of Salvation Supported License
+ * @license
+ *  *
+ * Copyright (C) 2011, Sutra Framework < info@sutraphp.com | www.sutraphp.com >
  *
- * CODER OF SALVATION SUPPORTED LICENSE
- * ===============================================================================
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  * 
- * Coder Des Heils Licence Agreement Please READ this Coder Des Heils
- * Supported Version licence agreement (SSV) carefully before DOWNLOADING,
- * INSTALLING or USING the Software.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
  * 
- * The terms of this Licence constitute an agreement between you, either an
- * individual or a company or similar entity, as the purchaser or user of the
- * Software (hereafter "You") and Coder Des Heils (hereafter "Me"). This Licence 
- * applies to the Software, Documentation and any updates which have been provided 
- * for the Software. This is not the complete license, but here is the main thought:
- * 
- * I WANT TO CONTRIBUTE TO THE OPENSOURCE COMMUNITY AS LONG AS IT DOES NOT HARM YOU
- * OR YOUR CORE BUSINESSFIELD.  YOU SHOULD ALWAYS  APPROACH ME FOR FURTHER
- * IMPLEMENTATIONS, EXTENSIONS, MODULES, CUSTOM PATCHES BEFORE APPROACHING OTHERS.
- * %license%
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+
  */
 
 class translate {
 
   public function __construct(){  }
+
+  public function processHTML( $html, $languagecode_from, $languagecode_to, $forbiddenClasses = array(), $tags = array("a","b","span","h1","h2","h3","h4","h5","h6","i","div","td","p","li") ){
+    $dom = new DOMDocument();
+    $dom->loadHTML( $html );
+    foreach ($tags as $tag ){
+      $elements = $dom->getElementsByTagName( $tag );
+      foreach( $elements as $value ){
+        if( !in_array( $value->attributes->getNamedItem("class")->nodeValue, $forbiddenClasses ) &&
+            !in_array( $value->attributes->getNamedItem("id")->nodeValue,    $forbiddenIds ) )
+//          $text = $value->nodeValue;
+//          $text = str_replace( "<br/>", "<br>", $value->nodeValue );
+//          $text = str_replace( "<br>", "'br'", $value->nodeValue );
+//          $text = $this->process( $text, $languagecode_from, $languagecode_to );
+//          $text = str_replace( "'br'", "<br>", $text );
+          $value->nodeValue = $this->process( $value->nodeValue, $languagecode_from, $languagecode_to );
+          //$value->nodeValue = str_replace( "'br'", "<br>", $value->nodeValue );
+      }
+    }
+    return $dom->saveHTML();
+  }
 
   public function process( $text, $languagecode_from, $languagecode_to ){
     $sutra = sutra::get();

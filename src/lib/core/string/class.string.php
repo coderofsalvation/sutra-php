@@ -17,7 +17,25 @@
  *   // some code
  * </code>
  *
- * @package ...
+ * @package sutra
+ * @license
+ *  *
+ * Copyright (C) 2011, Sutra Framework < info@sutraphp.com | www.sutraphp.com >
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+
  */
 
 class string{
@@ -63,7 +81,7 @@ class string{
       $int = (int) $int;
       if ( $int < 0 || $int > 254 ) return false;
     }
-    if ( !ereg( "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}", $ip_address ) ) return false;
+    if ( !preg_match( "/[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/i", $ip_address ) ) return false;
     return true;
   }
 
@@ -86,6 +104,33 @@ class string{
       else                    $disabled[] = substr( $token, 1, strlen($token)-1 );
     return array( "enabled" => $enabled, "disabled" => $disabled );
   }
+
+	/**
+	 * xss - protect the strings inside an array or object agains xss values
+	 * 
+	 * @param mixed $mixed 
+	 * @access public
+	 * @return void
+	 */
+	function xss($mixed)
+	{
+		if (is_array($mixed)) {
+			foreach($mixed as $key => $value) {
+				if (is_array($value) || is_object($value)) $mixed[$key] = xss($value);
+				else $mixed[$key] = htmlspecialchars($value);
+			}
+		} elseif (is_object($mixed)) {
+			$assoc_obj_vars = get_object_vars($mixed);
+			foreach($assoc_obj_vars as $key => $value) {
+				if (is_array($value) || is_object($value)) $mixed->$key = xss($value);
+				else $mixed->$key = htmlspecialchars($value);
+			}
+		} else {
+			$mixed = htmlspecialchars($mixed);
+		}
+		return $mixed;
+	}
+
 }
 
 ?>

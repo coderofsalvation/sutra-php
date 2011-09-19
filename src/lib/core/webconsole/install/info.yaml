@@ -1,0 +1,14 @@
+version: 1.0
+description: sutra webconsole (for debugging/managing functionality without having to use a big CMS/backend)
+note:|
+  Usage: just launch 'http://www.yoursite.com/webconsole' to trigger the webconsole (login/password: root/root)
+
+    NOTE: please change password using 'htpasswd' cmd (in bash shell)
+
+    For examples on usage see /lib/core/webconsole/cfg/commands
+
+dependency:
+  mod: 
+  lib:
+    - tpl:1.03
+    - session:1.0
