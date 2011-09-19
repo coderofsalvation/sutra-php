@@ -8,22 +8,25 @@
     {if !$admin_hideadvanced}
     {#advanced#}&nbsp;&nbsp;<input type="checkbox" onclick="admin.toggleNames( 'advanced', this.checked )"><br>
     {/if}
+    {if !$admin_hidedescription}
     {#explanation#}&nbsp;&nbsp;<input type="checkbox"  onclick="admin.toggleNames( 'helpInfo', this.checked, true ); admin.toggleNames( 'help', this.checked )" ><br>
+    {/if}
     {foreach from=$filter item="f"}
       {$f|ucfirst}&nbsp;&nbsp;<input type="checkbox" onclick="admin.toggleNames( '{$f}', this.checked );" ><br>
     {/foreach}
+    {if is_array($link)}
+      <div align="right" class="padding-left" id="navigation">
+        {foreach from=$link item="l"}
+        <a href="{$l.href}" class="ajax" rel="popupContent">{$l.label|ucfirst}&nbsp;&laquo;</a><br>
+        {/foreach}
+      </div>
+    {/if}
+    {if !$admin_hidedescription}
     <div id="helpInfo" name="helpInfo" class="opacity-off">
       <i>{$admin_description}</i>
     </div>
+    {/if}
   </div>
-  {if is_array($link)}
-  <div align="right" class="padding-left" id="navigation">
-    {foreach from=$link item="l"}
-    <a href="{$l.href}" class="ajax" rel="popupContent">{$l.label|ucfirst}&nbsp;&laquo;</a><br>
-    {/foreach}
-  </div>
-  <br>
-  {/if}
   {$container_content}
 </div>
 {*</div>*}

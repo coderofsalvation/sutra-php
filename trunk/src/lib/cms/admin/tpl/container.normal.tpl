@@ -11,7 +11,9 @@
     {if !$admin_hideadvanced}
     {#advanced#}&nbsp;&nbsp;<input type="checkbox"  onclick="admin.toggleNames( 'advanced', this.checked )"><br>
     {/if}
+    {if !$admin_hidedescription}
     {#explanation#}&nbsp;&nbsp;<input type="checkbox"  onclick="admin.toggleNames( 'helpInfo', this.checked, true ); admin.toggleNames( 'help', this.checked )" ><br>
+    {/if}
     {foreach from=$filter item="f"}
       {$f|ucfirst}&nbsp;&nbsp;<input type="checkbox"  onclick="admin.toggleNames( '{$f}', this.checked );" ><br>
     {/foreach}
@@ -23,9 +25,11 @@
     {/foreach}
   </div>
   {/if}
+  {if !$admin_hidedescription}
   <div id="helpInfo" name="helpInfo" class="opacity-off">
     <i>{$admin_description}</i>
   </div>
+  {/if}
   <div class="clear">
 </div>
 <div class="clear"></div>
